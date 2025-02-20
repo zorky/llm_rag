@@ -2,14 +2,13 @@ import logging
 import logging.config
 import yaml
 
-def setup_logging(config_file="logging.yaml"):
+def setup_logging(config_file="./utils/logging.yaml"):
     """Charge la configuration des logs depuis un fichier YAML."""
     with open(config_file, "r") as f:
         config = yaml.safe_load(f)
     logging.config.dictConfig(config)
 
 def get_logger(name=None):
-    """Récupère un logger avec le nom donné."""
     return logging.getLogger(name)
 
 # logger.debug("Ceci est un log de debug")

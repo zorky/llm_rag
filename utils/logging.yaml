@@ -8,19 +8,19 @@ formatters:
 handlers:
   console:
     class: logging.StreamHandler
-    # level: DEBUG
-    level: WARNING
+    level: DEBUG
+#    level: WARNING
     formatter: simple
     stream: ext://sys.stdout
 
 loggers:
   raggy_logger:
-    # level: DEBUG
-    level: WARNING
+    level: DEBUG
+#    level: WARNING
     handlers: [console]
     propagate: no
 
 root:
-  # level: DEBUG
-  level: WARNING
+  level: DEBUG
+#  level: WARNING
   handlers: [console]

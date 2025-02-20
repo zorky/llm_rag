@@ -1,10 +1,16 @@
-# LLM & RAG LLAMA 2
+# LLM & RAG LLAMA 2 expérimentation
+
+## Raggy Nano RAG
+
+Expérimentation de création d'un RAG puis recherche dedans
 
 ## Prérequis
 
 ### HuggingFace
 
-Un compte est nécessaire afin de pouvoir puller les modèles : https://huggingface.co/ 
+** /!\ attention, HuggingFace va puller les modèles utilisés et les stocker en local, cela peut représenter plusieurs Go ! /!\ **
+
+Un compte est nécessaire afin de pouvoir _puller_ les modèles : https://huggingface.co/ 
 
 Puis un token à initialiser : https://huggingface.co/settings/tokens et certainement se logger sur HF via le cli : https://huggingface.co/docs/huggingface_hub/en/guides/cli#huggingface-cli-login
 

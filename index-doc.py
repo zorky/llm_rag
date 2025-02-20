@@ -1,31 +1,54 @@
 import chromadb
-from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-import logging
-logging.basicConfig(level=logging.DEBUG)
+from utils.model_embeddings import get_embedding_model
+from utils.duration_decorator import measure_time
+from utils import logger
 
-# Configuration du modèle d'embedding
-embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+LOGGER = "raggy_logger"
 
-# Initialisation de ChromaDB
-chroma_client = chromadb.PersistentClient(path="./chroma_db")
-collection = chroma_client.get_or_create_collection(name="docs")
+CHROMA_DB = "./chroma_db2"
+CHROMA_COLLECTION = "docs"
 
-# Charger et découper un document PDF
-pdf_loader = PyPDFLoader("kb/document.pdf")
-pages = pdf_loader.load()
+KB_DOC = "kb/document.pdf"
+IDX_PREFIX = "doc_"
 
-text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
-texts = text_splitter.split_documents(pages)
+@measure_time
+def create_db():
+    """
+    Init ChromaDB et indexe les chunks de texte d'un document PDF avec embeddings (vecteurs)
+    """
+    _init_logger()
 
-# Indexation des passages dans ChromaDB
-for i, chunk in enumerate(texts):
-    collection.add(
-        ids=[f"doc_{i}"],
-        documents=[chunk.page_content],
-        metadatas=[{"source": "document.pdf"}]
-    )
+    embedding_model = get_embedding_model()
 
-print(f"Indexation terminée : {len(texts)} chunks ajoutés.")
+    chroma_client = chromadb.PersistentClient(path=CHROMA_DB)
+    collection = chroma_client.get_or_create_collection(name=CHROMA_COLLECTION)
+
+    # Charger et découper un document PDF
+    pdf_loader = PyPDFLoader(KB_DOC)
+    pages = pdf_loader.load()
+
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
+    texts = text_splitter.split_documents(pages)
+
+    # Indexation des passages dans ChromaDB
+    for i, chunk in enumerate(texts):
+        embedding_vector = embedding_model.embed_query(chunk.page_content) # optionnel
+        collection.add(
+            ids=[f"{IDX_PREFIX}{i}"],
+            documents=[chunk.page_content],
+            embeddings=[embedding_vector], # optionnel
+            metadatas=[{"source": KB_DOC}]
+        )
+
+    print(f"Indexation terminée : {len(texts)} chunks ajoutés.")
+
+def _init_logger():
+     logger.setup_logging()
+     log = logger.get_logger(LOGGER)
+     return log
+
+if __name__ == '__main__':
+    create_db()
