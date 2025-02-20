@@ -1,6 +1,14 @@
 # LLM & RAG LLAMA 2
 
-## Initialisation venv
+## Prérequis
+
+### HuggingFace
+
+Un compte est nécessaire afin de pouvoir puller les modèles : https://huggingface.co/ 
+
+Puis un token à initialiser : https://huggingface.co/settings/tokens et certainement se logger sur HF via le cli : https://huggingface.co/docs/huggingface_hub/en/guides/cli#huggingface-cli-login
+
+### Initialisation venv
 
 Installe pytorch avec le support GPU CUDA
 
