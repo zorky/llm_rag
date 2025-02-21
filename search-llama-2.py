@@ -14,6 +14,8 @@ print(f"Support GPU : {has_cuda}")  # Doit renvoyer True si CUDA est bien instal
 if has_cuda:
     print(f"Version CUDA : {torch.version.cuda}")  # Doit afficher la version de CUDA utilisée
 
+USE_GPU = True
+
 # Charger Llama 2
 model_name = "NousResearch/Llama-2-7b-chat-hf"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
@@ -32,7 +34,7 @@ def model_init():
     """
     Selon CUDA avec PyTorch, initialisera avec GPU CUDA ou CPU
     """
-    if has_cuda:
+    if has_cuda and USE_GPU:
         model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.float16).to("cuda")
     else:
         # force le CPU vs GPU CUDA
@@ -56,7 +58,7 @@ def generate_response(question, model, collection):
     prompt = f"Voici des informations utiles : {retrieved_texts}\n\nQuestion : {question}\nRéponse :"
 
     # Génération tokens avec Llama 2
-    if has_cuda:
+    if has_cuda and USE_GPU:
         inputs = tokenizer(prompt, return_tensors="pt").to("cuda")
     else:
         # force le CPU
