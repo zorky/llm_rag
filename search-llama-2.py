@@ -10,9 +10,9 @@ from utils.duration_decorator import measure_time
 USE_GPU = True
 
 has_cuda = torch.cuda.is_available()
-print(f"Support GPU : {has_cuda}")  # Doit renvoyer True si CUDA est bien installé
+print(f"Support GPU : {has_cuda}")
 if has_cuda:
-    print(f"Version CUDA : {torch.version.cuda}")  # Doit afficher la version de CUDA utilisée
+    print(f"Version CUDA : {torch.version.cuda}")
 
 @measure_time
 def _chroma_load():
@@ -32,35 +32,28 @@ def _init_logger():
     return log
 
 def _init_llm():
-    _model = model_init()
+    _model = _model_init()
     _collection = _chroma_load()
 
     return _model, _collection
 
+def _cuda_or_cpu():
+    return "cuda" if has_cuda and USE_GPU else "cpu"
+
 @measure_time
-def model_init():
+def _model_init():
     """
     Selon CUDA avec PyTorch, initialisera avec GPU CUDA ou CPU
     """
-    if has_cuda and USE_GPU:
-        model = AutoModelForCausalLM.from_pretrained(get_model_name_llm(), torch_dtype=torch.float16).to("cuda")
-    else:
-        # force le CPU vs GPU CUDA
-        model = AutoModelForCausalLM.from_pretrained(get_model_name_llm(), torch_dtype=torch.float16).to("cpu")
-    return model
+    return AutoModelForCausalLM.from_pretrained(get_model_name_llm(), torch_dtype=torch.float16).to(_cuda_or_cpu())
 
 @measure_time
 def generate_response_nlp(prompt, model):
     """ Génération de la réponse Llama 2 """
 
     tokenizer = _get_tokenizer()
-    if has_cuda and USE_GPU:
-        inputs = tokenizer(prompt, return_tensors="pt").to("cuda")
-    else:
-        inputs = tokenizer(prompt, return_tensors="pt").to("cpu")
+    inputs = tokenizer(prompt, return_tensors="pt").to(_cuda_or_cpu())
 
-    # ValueError: Input length of input_ids is 460, but `max_length` is set to 200. This can lead to unexpected behavior. You should consider increasing `max_length` or, better yet, setting `max_new_tokens`.
-    # output = model.generate(**inputs, max_length=200)
     output = model.generate(**inputs, max_new_tokens=200)
     return tokenizer.decode(output[0], skip_special_tokens=True)
 
@@ -76,7 +69,7 @@ def search_responses(question):
     query_embedding = embedding_model.embed_query(question)
     results = collection.query(
         # query_texts=[question], # recherche textuelle simple (mode BM25)
-        query_embeddings=[query_embedding], # optionnel si ChromaDb a été initialisé avec des embeddings pour une recherche sémantique
+        query_embeddings=[query_embedding], # si ChromaDb a été initialisé avec des embeddings pour une recherche sémantique
         n_results=3
     )
 
@@ -88,5 +81,3 @@ def search_responses(question):
 if __name__ == '__main__':
     question = "Quels sont les points clés du document ?"
     print(search_responses(question))
-    # question = input("Poser une question : ")
-    # print(search_responses(question))
