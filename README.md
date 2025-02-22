@@ -115,7 +115,7 @@ Harcelé(e), l’enfant risque d’être encore plus isolé(e) et fragile.
 Le harcèlement, c’est le refus  de la différence !
 ```
 
-**Génération de la réponse par Llama 2** qui crée un résumé
+**Génération de la réponse par Llama 2** qui crée un résumé, qui peut être différent à chaque exécution
 
 ```
 Les points clés du document sont les suivants :
@@ -124,5 +124,14 @@ Les points clés du document sont les suivants :
 2. Le harcèlement peut prendre des formes différentes, allant des moqueries et des surnoms blessants aux actes plus graves tels que les coups et les vols.
 3. Le harcèlement peut être commis par un ou plusieurs agresseurs, et il peut avoir des conséquences graves pour la victime, notamment l'isolement et la blessure émotionnelle.
 4. Le harcèlement est un refus de la différence, et il est important de comprendre et de lutter contre cette forme de violence.
+```
+
+```
+Les points clés du document sont :
+
+1. Le harcèlement est une violence répétée, qui peut être physique ou verbale, et qui peut avoir des conséquences graves sur la santé mentale et physique des victimes.
+2. Le harcèlement peut prendre de nombreuses formes, notamment des moqueries, des insultes, des coups, des vols, etc.
+3. Le harcèlement peut être commis par un ou plusieurs agresseurs, et peut être motivé par le désir de dominer, de blesser et d'exclure les victimes.
+4. Le harcèlement peut être causé par des raisons telles que la différence de l'enfant harcelé par rapport à ses camarades, ou le fait qu'il est isolé et n'a pas d'amis qui pourraient le défendre
 ```
 
