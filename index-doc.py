@@ -8,7 +8,7 @@ from utils import logger
 
 LOGGER = "raggy_logger"
 
-CHROMA_DB = "./chroma_db2"
+CHROMA_DB = "./chroma_db3"
 CHROMA_COLLECTION = "docs"
 
 KB_DOC = "kb/harcelement-ecole.pdf"
@@ -35,11 +35,12 @@ def create_db():
 
     # Indexation des passages dans ChromaDB
     for i, chunk in enumerate(texts):
-        embedding_vector = embedding_model.embed_query(chunk.page_content) # optionnel
+        embedding_vector = embedding_model.embed_documents([chunk.page_content])[0] # CamemBERT
+        # embedding_vector = embedding_model.embed_query(chunk.page_content) # LLMA2
         collection.add(
             ids=[f"{IDX_PREFIX}{i}"],
             documents=[chunk.page_content],
-            embeddings=[embedding_vector], # optionnel
+            embeddings=[embedding_vector],
             metadatas=[{"source": KB_DOC}]
         )
 

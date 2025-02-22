@@ -1,4 +1,7 @@
 chromadb
+faiss-cpu
+tiktoken # Camembert
+sentencepiece # Camembert
 transformers
 sentence-transformers
 langchain-community

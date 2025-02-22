@@ -1,4 +1,4 @@
-# LLM & RAG LLAMA 2 expérimentation
+# LLM & RAG CamemBERT & LLAMA 2 expérimentation
 
 ## Raggy Nano RAG
 
@@ -61,6 +61,8 @@ $ pip install -r requirements.txt
 
 ### 1- Constitution base vectorielle avec un modèle opensource : index-doc.py
 
+Avec CamemBERT.
+
 - PDF : extraction en "chunks" de texte (extraits)
 - BDD : stockage des extraits dans ChromaDb placé dans le répertoire `chroma_db`
 
@@ -70,10 +72,13 @@ Indexation d'un document PDF : 25 s
 $ python index-doc.py # lit et index document.pdf
 ```
 
-### 2- Recherche dans la base ChromaDb sous forme de questions / réponses avec modèle de réponse Llama 2 : search-doc.py
+### 2- Recherche dans la base ChromaDb sous forme de questions / réponses
+
+CamemBERT est utilisé pour la recherche dans Chroma.
+Llama 2 pour générer la réponse en langage naturel.
 
 ```bash
-$ python search-doc.py # recherche dans la base indexée
+$ python search-camembert.py # recherche dans la base indexée
 ```
 
 Temps d'exécution :
