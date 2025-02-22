@@ -2,7 +2,7 @@
 
 ## Raggy Nano RAG
 
-Expérimentation de création d'un nano RAG puis recherche dedans
+Expérimentation de création d'un nano RAG à partir d'un PDF puis question / réponse
 
 ## Prérequis
 
@@ -16,7 +16,7 @@ Un compte est nécessaire afin de pouvoir _puller_ les modèles : https://huggin
 
 Puis un token à initialiser : https://huggingface.co/settings/tokens et se logger sur HF via le cli : https://huggingface.co/docs/huggingface_hub/en/guides/cli#huggingface-cli-login
 
-#### Cli HF
+#### CLI HF
 
 ** /!\ attention, HuggingFace va puller les modèles utilisés et les stocker en local, cela peut représenter plusieurs Go ! /!\ **
 
@@ -80,4 +80,49 @@ Temps d'exécution :
 
 - initialisation modèle : 50 s
 - Chroma chargement : 1,5 s
-- Recherche sur la phrase : 350 s (5 min 50 s)
+- Recherche sur la phrase "Quels sont les points clés du document ?": 
+  - GPU : 350 s (5 min 50 s)
+  - CPU : 600 s (10 min)
+-----------------
+
+### Résultat de la question
+
+**Question :** Quels sont les points clés du document ?
+
+**Extraits de ChromaDb trouvés via les vecteurs / embeddings**
+
+```
+petites attaques. Comme une goutte d’eau qui fuit du robinet et ne
+s’arrête jamais. Séparément, ces actes ne paraissent pas graves. Mais
+répétés, ils blessent. Avec le temps, ils deviennent de plus en plus
+violents.
+
+- L’isolement : C’est à la fois une cause et une conséquence. Un/Une
+enfant peut être harcelé(e) parce qu’il/elle est différent(e) des autres
+(trop grand(e), trop bizarre, trop machin, trop truc…), mais aussi parce C’est quoi le harcèlement ?
+
+CA FAIT MAL !
+Le harcèlement à l’école, ce sont des violences répétées par un ou plusieurs
+élèves contre un/une autre camarade. Le ou les agresseurs agissent pour le
+dominer, le blesser et l’exclure. On parle de harcèlement quand on retrouve
+ces 4 éléments :
+- La violence : Ce sont parfois des actes très graves (insultes, coups,
+vols, etc.) mais aussi des gestes qui paraissent plus banals (moqueries,
+surnoms blessants, mises à l’écart…). (trop grand(e), trop bizarre, trop machin, trop truc…), mais aussi parce
+qu’il/elle est seul(e) et n’as pas d’ami(e)s qui pourraient le/la défendre.
+Harcelé(e), l’enfant risque d’être encore plus isolé(e) et fragile.
+
+Le harcèlement, c’est le refus  de la différence !
+```
+
+**Génération de la réponse par Llama 2** qui crée un résumé
+
+```
+Les points clés du document sont les suivants :
+
+1. Le harcèlement est une violence répétée qui peut être causée par des raisons différentes, notamment l'isolement, la différence et la médiocrité.
+2. Le harcèlement peut prendre des formes différentes, allant des moqueries et des surnoms blessants aux actes plus graves tels que les coups et les vols.
+3. Le harcèlement peut être commis par un ou plusieurs agresseurs, et il peut avoir des conséquences graves pour la victime, notamment l'isolement et la blessure émotionnelle.
+4. Le harcèlement est un refus de la différence, et il est important de comprendre et de lutter contre cette forme de violence.
+```
+

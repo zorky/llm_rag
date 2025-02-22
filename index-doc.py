@@ -2,14 +2,10 @@ import chromadb
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-from utils.model_embeddings import get_embedding_model
+from utils.constants import CHROMA_DB, CHROMA_COLLECTION, LOGGER
+from utils.model_embeddings import get_embedding_model_chroma
 from utils.duration_decorator import measure_time
 from utils import logger
-
-LOGGER = "raggy_logger"
-
-CHROMA_DB = "./chroma_db2"
-CHROMA_COLLECTION = "docs"
 
 KB_DOC = "kb/harcelement-ecole.pdf"
 IDX_PREFIX = "doc_"
@@ -21,7 +17,7 @@ def create_db():
     """
     _init_logger()
 
-    embedding_model = get_embedding_model()
+    embedding_model = get_embedding_model_chroma()
 
     chroma_client = chromadb.PersistentClient(path=CHROMA_DB)
     collection = chroma_client.get_or_create_collection(name=CHROMA_COLLECTION)
