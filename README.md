@@ -10,11 +10,42 @@ Expérimentation de création d'un nano RAG puis recherche dedans
 
 HuggingFace, un hub, est utilisé pour le modèle de langage et le modèle de recherche.
 
-** /!\ attention, HuggingFace va puller les modèles utilisés et les stocker en local, cela peut représenter plusieurs Go ! /!\ **
+#### Compte HF
 
 Un compte est nécessaire afin de pouvoir _puller_ les modèles : https://huggingface.co/ 
 
 Puis un token à initialiser : https://huggingface.co/settings/tokens et se logger sur HF via le cli : https://huggingface.co/docs/huggingface_hub/en/guides/cli#huggingface-cli-login
+
+#### Cli HF
+
+** /!\ attention, HuggingFace va puller les modèles utilisés et les stocker en local, cela peut représenter plusieurs Go ! /!\ **
+
+Le CLI HF permet de vide son cache de modèles stockés sur le disque 
+```bash
+$ pip install -U "huggingface_hub[cli]"
+```
+
+Il demandera quels modèles à supprimer en sélectionnant le modèle à supprimer
+
+```bash
+$ huggingface-cli delete-cache
+
+? Select revisions to delete: 0 revisions selected counting for 0.0.
+❯ ○ None of the following (if selected, nothing will be deleted).
+
+Model meta-llama/Llama-2-7b-chat-hf (13.5G, used 2 days ago)
+  ○ f5db02db: main # modified 2 weeks ago
+
+Model sentence-transformers/all-mpnet-base-v2 (438.7M, used 2 days ago)
+  ○ 9a322596: main # modified 4 weeks ago
+
+Model NousResearch/Llama-2-7b-chat-hf (13.5G, used 16 minutes ago)
+  ○ 351844e7: main # modified 3 days ago
+
+Model sentence-transformers/all-MiniLM-L6-v2 (91.6M, used 15 minutes ago)
+  ○ fa97f6e7: main # modified 3 weeks ago
+
+```
 
 ### Initialisation venv
 
