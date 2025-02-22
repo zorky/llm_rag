@@ -8,13 +8,12 @@ from utils.duration_decorator import measure_time
 
 LOGGER = "raggy_logger"
 CHROMA_DB = "./chroma_db2"
+USE_GPU = True
 
 has_cuda = torch.cuda.is_available()
 print(f"Support GPU : {has_cuda}")  # Doit renvoyer True si CUDA est bien installé
 if has_cuda:
     print(f"Version CUDA : {torch.version.cuda}")  # Doit afficher la version de CUDA utilisée
-
-USE_GPU = True
 
 # Charger Llama 2
 model_name = "NousResearch/Llama-2-7b-chat-hf"

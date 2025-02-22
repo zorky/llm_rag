@@ -11,7 +11,7 @@ LOGGER = "raggy_logger"
 CHROMA_DB = "./chroma_db2"
 CHROMA_COLLECTION = "docs"
 
-KB_DOC = "kb/document.pdf"
+KB_DOC = "kb/harcelement-ecole.pdf"
 IDX_PREFIX = "doc_"
 
 @measure_time
