@@ -73,7 +73,7 @@ $ python index-doc.py # lit et index document.pdf
 ### 2- Recherche dans la base ChromaDb sous forme de questions / réponses avec modèle de réponse Llama 2 : search-doc.py
 
 ```bash
-$ python search-doc.py # recherche dans la base indexée
+$ python search-llama-2.py # recherche dans la base indexée
 ```
 
 Temps d'exécution :
@@ -81,8 +81,8 @@ Temps d'exécution :
 - initialisation modèle : 50 s
 - Chroma chargement : 1,5 s
 - Recherche sur la phrase "Quels sont les points clés du document ?": 
-  - GPU : 350 s (5 min 50 s)
-  - CPU : 600 s (10 min)
+  - GPU : 350 s (5 min 50 s) mais utilise aussi le CPU car la carte graphique est trop limitée (2 Go VRAM)
+    
 -----------------
 
 ### Résultat de la question
