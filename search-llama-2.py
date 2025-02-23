@@ -68,8 +68,7 @@ def search_responses(question):
     embedding_model = get_embedding_model_chroma()
     query_embedding = embedding_model.embed_query(question)
     results = collection.query(
-        # query_texts=[question], # recherche textuelle simple (mode BM25)
-        query_embeddings=[query_embedding], # si ChromaDb a été initialisé avec des embeddings pour une recherche sémantique
+        query_embeddings=[query_embedding],
         n_results=3
     )
 

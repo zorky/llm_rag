@@ -13,7 +13,7 @@ IDX_PREFIX = "doc_"
 @measure_time
 def create_db():
     """
-    Init ChromaDB et indexe les chunks de texte d'un document PDF avec embeddings (vecteurs)
+    Init ChromaDB et indexe le texte d'un document PDF avec embeddings (vecteurs)
     """
     _init_logger()
 
