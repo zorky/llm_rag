@@ -135,3 +135,8 @@ Les points clés du document sont :
 4. Le harcèlement peut être causé par des raisons telles que la différence de l'enfant harcelé par rapport à ses camarades, ou le fait qu'il est isolé et n'a pas d'amis qui pourraient le défendre
 ```
 
+### Schéma des traitements
+
+![schema-scripts-llm.png](schema-scripts-llm.png)
+
+source : https://excalidraw.com/#json=C9Zef6EHk8ZdpQVKOZy_A,P-nk27znVP3vEhKJVEMh9Q  
