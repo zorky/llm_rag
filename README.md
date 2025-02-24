@@ -6,6 +6,23 @@ Expérimentation de création d'un nano RAG à partir d'un PDF puis question / r
 
 ## Prérequis
 
+### NVidia et CUDA
+
+PyTorch est installé avec CUDA (cf. requirements.txt).
+
+Sous Windows, pour la prise en compte de CUDA, cela demandera peut-être d'installer le [CUDA Toolkit 12.8](https://developer.nvidia.com/cuda-downloads?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exe_local) 
+
+Vérifier que CUDA est bien pris en charge par PyTorch, après installation des packages (cf. Initialisation venv plus bas) :
+
+```bash
+$ python
+>>> import torch
+>>> torch.cuda.is_available()
+True
+>>> exit()
+```
+ 
+
 ### HuggingFace
 
 HuggingFace, un hub, est utilisé pour le modèle de langage et le modèle de recherche.
