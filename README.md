@@ -10,13 +10,29 @@ Expérimentation de création d'un nano RAG à partir d'un PDF puis question / r
 
 HuggingFace, un hub, est utilisé pour le modèle de langage et le modèle de recherche.
 
-#### Compte HF
+#### Compte Hugging Face
 
-Un compte est nécessaire afin de pouvoir _puller_ les modèles : https://huggingface.co/ 
+A priori, le token n'est pas nécessaire et donc pas de login à Hugging Face avec les modèles Opensource utilisés.
 
-Puis un token à initialiser : https://huggingface.co/settings/tokens et se logger sur HF via le cli : https://huggingface.co/docs/huggingface_hub/en/guides/cli#huggingface-cli-login
+Si besoin :
 
-#### CLI HF
+- Se créer un compte : https://huggingface.co/
+- Initialiser un token : https://huggingface.co/settings/tokens
+- Se logger sur HF via le cli avec le token précédemment généré (https://huggingface.co/docs/huggingface_hub/en/guides/cli#huggingface-cli-login) 
+
+```bash
+$ huggingface-cli login
+Enter your token (input will not be visible):
+```
+
+Savoir si on est connecté à HG avec le cli (cf. ci-après)
+
+```bash
+$ huggingface-cli whoami
+Not logged in
+```
+
+#### Cli Hugging Face
 
 ** /!\ attention, HuggingFace va puller les modèles utilisés et les stocker en local, cela peut représenter plusieurs Go ! /!\ **
 
