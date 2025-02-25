@@ -1,4 +1,4 @@
-# LLM & RAG LLAMA 2 expérimentation
+# Expérimentation base vectorielle - sans LLM de réponse
 
 ## Raggy Nano RAG
 
@@ -137,6 +137,6 @@ Le harcèlement, c’est le refus  de la différence !
 
 ### Schéma des traitements
 
-![schema-scripts-llm.png](schema-scripts-llm.png)
+![schema-scripts-embeddings.png](schema-scripts-embeddings.png)
 
-source : https://excalidraw.com/#json=C9Zef6EHk8ZdpQVKOZy_A,P-nk27znVP3vEhKJVEMh9Q  
+source : https://excalidraw.com/#json=0l8w3PC60w6FM_mJcqTmr,YrbQlq8x6n9nPW1BOIfPSw 
