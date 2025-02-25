@@ -2,25 +2,9 @@
 
 ## Raggy Nano RAG
 
-Expérimentation de création d'un nano RAG à partir d'un PDF puis question / réponse
+Expérimentation d'indexation d'un document PDF dans une base Chroma, question sur cette BDD et obtention des documents issus de Chroma.
 
 ## Prérequis
-
-### NVidia et CUDA
-
-PyTorch est installé avec CUDA (cf. requirements.txt).
-
-Sous Windows, pour la prise en compte de CUDA, cela demandera peut-être d'installer le [CUDA Toolkit 12.8](https://developer.nvidia.com/cuda-downloads?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exe_local) 
-
-Vérifier que CUDA est bien pris en charge par PyTorch, après installation des packages (cf. Initialisation venv plus bas) :
-
-```bash
-$ python
->>> import torch
->>> torch.cuda.is_available()
-True
->>> exit()
-```
  
 
 ### HuggingFace
@@ -97,24 +81,22 @@ $ pip install -r requirements.txt
 - PDF : extraction en "chunks" de texte (extraits)
 - BDD : stockage des extraits dans ChromaDb placé dans le répertoire `chroma_db`
 
-Indexation d'un document PDF : 25 s
+Indexation d'un document PDF en vecteurs / embeddings : 15 s
 
 ```bash
 $ python index-doc.py # lit et index document.pdf
 ```
 
-### 2- Recherche dans la base ChromaDb sous forme de questions / réponses avec modèle de réponse Llama 2 : search-doc.py
+### 2- Recherche dans la base ChromaDb sous forme de questions / documents trouvés
 
 ```bash
-$ python search-llama-2.py # recherche dans la base indexée
+$ python search-chroma.py # recherche dans la base indexée
 ```
 
 Temps d'exécution :
 
-- initialisation modèle : 50 s
-- Chroma chargement : 1,5 s
-- Recherche sur la phrase "Quels sont les points clés du document ?": 
-  - GPU : 350 s (5 min 50 s) mais utilise aussi le CPU car la carte graphique est trop limitée (2 Go VRAM)
+- Chroma chargement : 0,25 s
+- Recherche de documents sur la phrase "Quels sont les points clés du document ?" : 10 s
     
 -----------------
 
@@ -125,7 +107,11 @@ Temps d'exécution :
 **Extraits de ChromaDb trouvés via les vecteurs / embeddings**
 
 ```
-petites attaques. Comme une goutte d’eau qui fuit du robinet et ne
+Extraits de ChromaDb trouvés
+
+Question : Quels sont les points clés du document ?
+
+Documents : petites attaques. Comme une goutte d’eau qui fuit du robinet et ne
 s’arrête jamais. Séparément, ces actes ne paraissent pas graves. Mais
 répétés, ils blessent. Avec le temps, ils deviennent de plus en plus
 violents.
@@ -146,26 +132,7 @@ qu’il/elle est seul(e) et n’as pas d’ami(e)s qui pourraient le/la défendr
 Harcelé(e), l’enfant risque d’être encore plus isolé(e) et fragile.
 
 Le harcèlement, c’est le refus  de la différence !
-```
 
-**Génération de la réponse par Llama 2** qui crée un résumé, qui peut être différent à chaque exécution
-
-```
-Les points clés du document sont les suivants :
-
-1. Le harcèlement est une violence répétée qui peut être causée par des raisons différentes, notamment l'isolement, la différence et la médiocrité.
-2. Le harcèlement peut prendre des formes différentes, allant des moqueries et des surnoms blessants aux actes plus graves tels que les coups et les vols.
-3. Le harcèlement peut être commis par un ou plusieurs agresseurs, et il peut avoir des conséquences graves pour la victime, notamment l'isolement et la blessure émotionnelle.
-4. Le harcèlement est un refus de la différence, et il est important de comprendre et de lutter contre cette forme de violence.
-```
-
-```
-Les points clés du document sont :
-
-1. Le harcèlement est une violence répétée, qui peut être physique ou verbale, et qui peut avoir des conséquences graves sur la santé mentale et physique des victimes.
-2. Le harcèlement peut prendre de nombreuses formes, notamment des moqueries, des insultes, des coups, des vols, etc.
-3. Le harcèlement peut être commis par un ou plusieurs agresseurs, et peut être motivé par le désir de dominer, de blesser et d'exclure les victimes.
-4. Le harcèlement peut être causé par des raisons telles que la différence de l'enfant harcelé par rapport à ses camarades, ou le fait qu'il est isolé et n'a pas d'amis qui pourraient le défendre
 ```
 
 ### Schéma des traitements

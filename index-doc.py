@@ -31,11 +31,9 @@ def create_db():
 
     # Indexation des passages dans ChromaDB
     for i, chunk in enumerate(texts):
-        embedding_vector = embedding_model.embed_query(chunk.page_content)
         collection.add(
             ids=[f"{IDX_PREFIX}{i}"],
             documents=[chunk.page_content],
-            embeddings=[embedding_vector],
             metadatas=[{"source": KB_DOC}]
         )
 
