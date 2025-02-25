@@ -3,7 +3,6 @@ from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 from utils.constants import CHROMA_DB, CHROMA_COLLECTION, LOGGER
-from utils.model_embeddings import get_embedding_model_chroma
 from utils.duration_decorator import measure_time
 from utils import logger
 
@@ -16,8 +15,6 @@ def create_db():
     Init ChromaDB et indexe le texte d'un document PDF avec embeddings (vecteurs)
     """
     _init_logger()
-
-    embedding_model = get_embedding_model_chroma()
 
     chroma_client = chromadb.PersistentClient(path=CHROMA_DB)
     collection = chroma_client.get_or_create_collection(name=CHROMA_COLLECTION)

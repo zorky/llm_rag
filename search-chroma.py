@@ -2,7 +2,6 @@ import chromadb
 
 from utils import logger
 from utils.constants import CHROMA_DB, CHROMA_COLLECTION, LOGGER
-from utils.model_embeddings import get_embedding_model_chroma
 from utils.duration_decorator import measure_time
 
 @measure_time
@@ -27,10 +26,8 @@ def search_documents(question):
     _init_logger()
     collection = _chroma_load()
 
-    embedding_model = get_embedding_model_chroma()
-    query_embedding = embedding_model.embed_query(question)
     results = collection.query(
-        query_embeddings=[query_embedding],
+        query_texts=[question],  # recherche textuelle simple (mode BM25)
         n_results=3
     )
 
