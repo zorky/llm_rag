@@ -27,15 +27,13 @@ True
 
 HuggingFace, un hub, est utilisé pour le modèle de langage et le modèle de recherche.
 
-#### Compte Hugging Face
+#### Compte Hugging Face & autorisation d'utilisation des modèles
 
-A priori, le token n'est pas nécessaire et donc pas de login à Hugging Face avec les modèles Opensource utilisés.
-
-Si besoin :
+Un compte Hugging Face et un token vont être nécessaire, et également une demande d'autorisation d'utilisation sur les espaces des modèles
 
 - Se créer un compte : https://huggingface.co/
 - Initialiser un token : https://huggingface.co/settings/tokens
-- Se logger sur HF via le cli avec le token précédemment généré (https://huggingface.co/docs/huggingface_hub/en/guides/cli#huggingface-cli-login) 
+- Se logger sur HF via le cli avec le token précédemment généré (https://huggingface.co/docs/huggingface_hub/en/guides/cli#huggingface-cli-login)
 
 ```bash
 $ huggingface-cli login
@@ -48,6 +46,11 @@ Savoir si on est connecté à HG avec le cli (cf. ci-après)
 $ huggingface-cli whoami
 Not logged in
 ```
+
+Les modèles utilisés (Llama 2) demandent une autorisation pour les conditions d'utilisation, directement sur les espaces concernés :
+
+- NousResearch : https://huggingface.co/NousResearch/Llama-2-7b-chat-hf
+- Meta : https://huggingface.co/meta-llama/Llama-2-7b-chat-hf
 
 #### Cli Hugging Face
 
