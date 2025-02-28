@@ -1,0 +1,30 @@
+chromadb
+transformers
+sentence-transformers
+langchain-community
+langchain-huggingface
+accelerate>=0.26.0
+# torch support GPU CUDA https://pytorch.org/get-started/previous-versions/
+--extra-index-url https://download.pytorch.org/whl/cu126 # pour CUDA torch https://download.pytorch.org/whl/
+torch==2.6.0+cu126
+torchvision==0.21.0+cu126
+torchaudio==2.6.0+cu126
+
+# lecture PDF
+pypdf
+pyyaml
+# pour modèle GPTQ quantifié
+optimum
+gptqmodel
+auto-gptq
+# quantification en 4 ou 8 bits
+bitsandbytes
+
+# via llm-cpp pour quantification mais ne peut fonctionner avec les transformers
+# version précompilée binaire https://github.com/abetlen/llama-cpp-python/releases/tag/v0.3.4-cu124
+# => https://github.com/abetlen/llama-cpp-python/releases/download/v0.3.4-cu124/llama_cpp_python-0.3.4-cp310-cp310-win_amd64.whl
+# pip install llama_cpp_python-0.3.4-cp310-cp310-win_amd64.whl
+
+# pour modèle quantifié https://pypi.org/project/llama-cpp-python/ : ne peut se compiler sur mon poste
+#--extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu
+#llama-cpp-python
