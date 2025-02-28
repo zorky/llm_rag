@@ -1,0 +1,2146 @@
+<!DOCTYPE html>
+<!-- saved from url=(0117)https://coffeebytes.dev/en/fine-tuning-a-llm-small-practical-guide-with-resources/#where-to-fine-tune-an-llm-for-free -->
+<html data-theme="dark" lang="fr" class="translated-ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">.turbolinks-progress-bar {
+  position: fixed;
+  display: block;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: #0076ff;
+  z-index: 9999;
+  transition: width 300ms ease-out, opacity 150ms 150ms ease-in;
+  transform: translate3d(0, 0, 0);
+}</style>
+    
+    
+    
+        
+    
+
+    
+    
+    
+
+
+<link async="" rel="stylesheet" href="./Petit guide pratique avec ressources pour peaufiner un LLM _ Coffee bytes_files/style.bundle.min.575d5a575155a47ca231ca785e3714d295e686ed69ce97289b4e92e570f83844.css" integrity="sha256-V11aV1FVpHyiMcp4XjcU0pXmhu1pzpcom06S5XD4OEQ=">
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script async="" src="./Petit guide pratique avec ressources pour peaufiner un LLM _ Coffee bytes_files/gtm.js.téléchargement"></script><script defer="" src="./Petit guide pratique avec ressources pour peaufiner un LLM _ Coffee bytes_files/main.aa4c1acbcb518457777ef204f2742a206cbf94fcb2c3b9030c8ae276cd7fa964.js.téléchargement"></script>
+
+
+<script async="" src="./Petit guide pratique avec ressources pour peaufiner un LLM _ Coffee bytes_files/searchBundle.min.e8433db290d9c58d3b8cbedae3301bead4dfcc3c059ecce2736a1b64901157ed.js.téléchargement"></script>
+    
+    
+<script async="" src="./Petit guide pratique avec ressources pour peaufiner un LLM _ Coffee bytes_files/js"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-P84BC2GXX4', { 'anonymize_ip': false });
+}
+</script>
+
+    
+
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5F4NMW3');</script>
+
+    
+
+<style>#ENOE_TOOLBAR_CONTAINER *, #ENOE_TOOLBAR_CONTAINER *::before,#ENOE_TOOLBAR_CONTAINER *::after {
+    min-width: unset !important;
+    min-height: unset !important;
+}
+
+      #ENOE_TOOLBAR_CONTAINER {
+
+        font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        text-align: left;
+        color: white;
+        overflow: hidden;
+        padding: 4px;
+        border: none;
+        margin: 0px;
+        align-content: center;
+        align-items: center;
+        height: 40px;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-content: center;
+        justify-content: flex-start;
+        align-items: center;
+        display: flex;
+      }
+      
+      #ENOE_TOOLBAR_CONTAINER_MAX{
+
+        font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        text-align: left;
+        color: white;
+        overflow: hidden;
+        padding: 4px;
+        border: none;
+        margin: 0px;
+        align-content: center;
+        align-items: center;
+        color: white;
+        text-decoration: none;
+        height: 40px;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-content: center;
+        justify-content: flex-start;
+        align-items: center;
+        display: flex;
+      }
+      
+      #ENOE_maximize{
+          color: white;
+        text-decoration: none;
+      }
+
+      #content-table {
+        padding: 0px;
+        border: none;
+        margin: 0px;
+        border-spacing: 0px;
+        margin-left: 5px;
+        width: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-content: center;
+        justify-content: flex-start;
+        align-items: center;
+      }
+      
+      #content-table-min {
+        padding: 0px;
+        border: none;
+        margin: 0px;
+        border-spacing: 0px;
+        margin-left: 5px;
+        width: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-content: center;
+        justify-content: flex-start;
+        align-items: center;
+      }
+
+
+      #bar_promo {
+
+        cursor: pointer;
+
+        position: relative;
+
+        /* top:            -2px; */
+
+        text-decoration: underline;
+
+        margin-left: 20px;
+        color: white;
+        display: inline-block;
+      }
+     
+
+
+      .bar_title {
+        font-weight: bold;
+        position: relative;
+        /* margin-left: 5px; */
+        padding-left: 5px;
+        padding-right: 5px;
+        line-height: 26px;
+        display: block;
+        float: left;
+        height: 26px;
+      }
+
+      #bar_text, #bar_booking {
+        display: flex;
+        align-content: center;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        font-weight: 300 !important;
+        color: white;
+        text-decoration: none;
+      }
+
+      #bar_title_inact {
+        cursor: pointer;
+        background-color: #026cb1;
+        color: white;
+        display: inline;
+        height: 26px;
+        line-height: 26px;
+      }
+
+      #bar_title_act {
+        background-color: white;
+        color: #55d255;
+        display: inline;
+      }
+
+      #bar_title_inact:hover {
+        color: #55d255;
+      }
+
+      #bar_title_act:hover {
+        color: #026cb1;
+      }
+
+      #shifted{
+          margin-bottom: 20px;
+      }
+
+      #bar_text:visited {
+        color:  #5aa3f3;
+      }
+      #bar_text,
+      #bar_booking {
+        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+        font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
+        font-size: 15px;
+        font-weight: 400;
+        color: #ffffff;
+	cursor: pointer;
+        text-decoration: none;
+      }
+      #bar_promo {
+        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+        font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
+        font-size: 15px;
+        color: rgb(34, 46, 113);
+	cursor: pointer;
+        text-decoration: none;
+      }
+      #bar_text
+      {
+        color:  rgb(34, 46, 113);
+      line-height: 26px;
+        transition: .18s;
+        height: 26px;
+        padding-right: 20px;
+        padding-left: 20px;
+        font-weight: normal;
+      }
+      
+      #bar_booking {
+        color: rgba(255,255,255,.85);
+        line-height: 26px;
+        transition: .18s;
+        height: 26px;
+        padding-right: 20px;
+        padding-left: 20px;
+      }
+
+      /*#bar_text:hover {
+        color: rgba(255,255,255,1);
+        text-shadow: 0 1px 1px rgba(255,255,255,.4);
+      }*/
+
+      .bar_promo {
+        position: relative;
+        display: flex;
+        align-content: space-around;
+        justify-content: center;
+        align-items: center;
+        color: rgb(34, 46, 113);
+      }
+
+      .bar_promo__container {
+        position: relative;
+        display: flex;
+        background-color: white;
+        border-radius: 30px;
+        border: solid 1px white;
+        text-decoration: none;
+        align-content: center;
+    justify-content: center;
+    align-items: center;
+    line-height: 26px;
+    height: 26px;
+        width: 60px;
+}
+
+
+      .bar_promo__container--blue {
+        background-color: #5aa3f3;
+      }
+
+      .bar_promo__container--green {
+        background-color: #59dc87;
+      }
+
+      .booking__container {
+        position: relative;
+        display: flex;
+        background-color: #5aa3f3;
+        border-radius: 30px;
+        text-align: center;
+        font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
+        font-size: 15px;
+        justify-content: center;
+        align-items: center;
+        border: solid 1px white;
+            line-height: 2 !important;
+
+      }
+      
+      .user__container {
+        position: relative;
+        display: flex;
+        background-color: white;
+        border-radius: 30px;
+        text-align: center;
+        font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
+        font-size: 15px;
+        justify-content: center;
+        align-items: center;
+        border: solid 1px white;
+            line-height: 2 !important;
+
+      }
+        
+      .bar_promo__icon {
+        display: inline-block;
+        height: 18px !important;
+        margin-right: 4px;
+        margin-left: 8px;
+        vertical-align: middle;
+      }
+
+      .bar_promo__text {
+        display: inline-block;
+        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+        font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
+        font-size: 15px;
+        font-weight: 400;
+        text-decoration: none;
+        line-height: 0;
+        margin-bottom: 0;
+        margin-top: 0;
+        margin-right: 15px;
+      }
+
+      .bar_promo__arrow {
+        display: inline-block;
+        width: 9px;
+        height: 7px;
+        margin-left: 4px;
+        margin-right: 8px;
+            margin-bottom: 2px;
+      }
+
+      .bar_center {
+        padding-left: 20px;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+        text-align: left;
+        display: flex;
+      }
+
+      
+      #bar_title_inact {
+    border-radius: 5px;
+    background-color: #59dc87;
+    text-shadow: 0 1px 1px rgb(0 0 0 / 8%);
+    font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: inline-block;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 20px;
+    text-align: center;
+      }
+
+      #bar_title_act {
+        border-radius: 5px;
+        background-color: #fff;
+
+        font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+        font-style: normal;
+        font-stretch: normal;
+        letter-spacing: normal;
+        color: #242933;
+        display: inline-block;
+        text-align: center;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-left: 20px;
+      }
+
+      #bar_title_inact:hover {
+        color: #fff;
+        -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      #bar_title_act:hover {
+            color: #222e71;
+      }
+
+      #ENOE_minimize {
+        font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        font-weight: 400 !important;
+        font-style: normal;
+        font-stretch: normal;
+        letter-spacing: normal;
+        color: #ffffff;
+        text-decoration: none;
+        margin-right: 10px;
+        display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+      }
+
+      #ENOE_minimize:visited {
+        color: #ffffff;
+        text-decoration: none;
+      }
+
+      .chevron-left {
+        transform: rotate(90deg);
+        -webkit-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        height: 6px !important;
+        vertical-align: middle;
+      }
+      
+     .chevron-right {
+        transform: rotate(-90deg);
+        height: 8px !important;
+    vertical-align: initial;
+    margin-top: 2px;
+      }
+.merchant__price-old {
+  position: relative;
+  line-height: normal;
+  letter-spacing: 0px;
+  text-align: center;
+    }
+  .merchant__price-old::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    height: 2px;
+    width: 120%;
+    border-radius: 2px;
+    background-color: rgba(0,0,0,0.3); 
+}      
+      .merchant__price-arrow {
+        width: 10px;
+        height: 15.4px;
+        margin-left: 12px;
+        margin-right: 7px;
+    }
+    
+      input[type='button'] {
+        /* height: 30px; */
+        margin-bottom: 20px;
+      }
+
+      #title {
+        color: #5aa3f3;
+      }
+
+
+      /* new styles */
+      .container_toolbar {
+        padding: 20px;
+        margin-top: 20px;
+        border-radius: 15px;
+        background-color: white;
+        font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        color: #222e71;
+        width: 500px;
+        height: auto;
+        max-height: 70vh;
+        box-shadow: -4px 4px 4px lightgrey;
+        display: none;
+        position: fixed;
+        z-index: 99999999999;
+        overflow-y: scroll;
+      }
+
+      .promo-code__section {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+
+      .promo-code__item {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        margin-bottom: 12px;
+        padding: 16px 12px;
+        padding-left: 18px;
+        background-repeat: no-repeat;
+        -webkit-transition: .2s;
+        -o-transition: .2s;
+        transition: .2s;
+            border-radius: 30px;
+    background-color: whitesmoke;
+      }
+
+      .promo-code__title {
+        font-weight: 500;
+      }
+
+      .promo-code__value {
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        width: 100px;
+                font-size: 20px;
+      }
+
+      .promo-code__value-section {
+        margin-bottom: 8px;
+      }
+
+      .promo-code__condition {
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      .promo-code__list-text {
+        position: relative;
+        margin-bottom: 12px;
+      }
+
+
+
+      .promo-code__validity {
+        font-size: 12px;
+        font-weight: 400;
+      }
+
+      .copyBtn {
+        border: none;
+        padding: 6px 12px;
+        margin-left: 16px;
+        background-color: #59dc87;
+        border-radius: 4px;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        text-align: center;
+        text-transform: uppercase;
+        -webkit-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.1);
+        box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.1);
+        text-decoration: none;
+        display: inline-block;
+        -webkit-transition: 0.2s;
+        -o-transition: 0.2s;
+        transition: 0.2s;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+    .cb_button {
+    border-radius: 5px;
+    background-color: #59dc87;
+    text-shadow: 0 1px 1px rgb(0 0 0 / 8%);
+    font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 24px;
+    letter-spacing: normal;
+    color: #ffffff;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: block;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 20px;
+    text-align: center;
+    border:  none;
+    height: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+ cursor: pointer;
+    }
+    
+    
+.tb_result {
+  position: absolute;
+  box-sizing: border-box;
+}
+
+.tb_result .tb_result_header {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px;
+  height: 65px;
+  border: none;
+  border-bottom: 3px solid #006eaf;
+  color: #006eaf;
+  font-family: 'Helvetica Rounded', Helvetica, Arial, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 43px;
+  cursor: pointer;
+}
+
+.tb_result .tb_result_header span {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.tb_result .tb_result_header img {
+  vertical-align: text-bottom;
+  align-items: center;
+  margin-right: 5px;
+}
+
+.tb_result .tb_result_data {
+  padding: 0 15px;
+  overflow: auto;
+}
+
+.tb_result .tb_result_data:before,
+.tb_result .tb_result_data:after {
+  content: " ";
+  display: table;
+}
+
+.tb_result .tb_result_data .merchant_list_home:before,
+.tb_result .tb_result_data .merchant_list_home:after {
+  content: " ";
+  display: table;
+}
+
+.tb_result .tb_result_data .merchant_list_home.tpl_menu3 {
+  margin-top: 15px;
+}
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table {
+  display: table;
+  width: 100%;
+}
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table .row {
+  margin: 0;
+}
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_header {
+  display: table-header-group;
+  text-align: center;
+}
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_header .merchant_table_row {
+  height: 35px;
+}
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_header .merchant_table_row .merchant_header_name {
+  text-align: left;
+  width: 110px;
+  display: table-cell;
+  /* text-align: center; */
+  vertical-align: middle;
+}
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_header .merchant_table_row .merchant_header_remb {
+  width: 175px;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_header .merchant_table_row .merchant_header_code {
+  width: 115px;
+  display: table-cell;
+  text-align: right;
+  vertical-align: middle;
+}
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_header .merchant_table_cell {
+  vertical-align: bottom;
+  height: 25px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: #006eaf;
+}
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_header .merchant_table_cell a {
+  text-decoration: none;
+  color: #006eaf;
+}
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_body {
+  text-align: center;
+}
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_body>.merchant_table_row {
+  position: relative;
+  box-sizing: content-box;
+}
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_body>.merchant_table_row .merchant_header_name {
+  text-align: left;
+  width: 90px;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+
+}
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_body>.merchant_table_row .merchant_header_name img {
+  padding-left: 85px;
+  vertical-align: middle;
+}
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_body>.merchant_table_row .merchant_header_remb {
+  width: 230px;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_body>.merchant_table_row .merchant_header_code {
+  width: 90px;
+  display: table-cell;
+  text-align: right;
+  vertical-align: middle;
+}
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_body .merchant_table_cell:nth-of-type(1) {
+  text-align: left;
+}
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_body .merchant_table_cell:nth-of-type(1) h4 {
+  padding-left: 110px;
+  margin: 0;
+  display: none;
+}
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_body .merchant_table_cell:nth-of-type(2) h4 {
+  display: table;
+  width: 100%;
+  /* height: 100%; */
+  vertical-align: middle;
+  line-height: inherit;
+}
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_body .merchant_table_cell:nth-of-type(2) h4 span {
+  display: inline;
+  vertical-align: baseline;
+}
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_body .merchant_table_cell {
+  font-family: 'Helvetica Rounded', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #006eaf;
+  padding: 0;
+  vertical-align: middle;
+  background-size: 76px auto;
+  background-repeat: no-repeat;
+  background-position: 0 center;
+
+}
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_body .merchant_table_cell h4 {
+  margin: 0;
+  line-height: 50px;
+  vertical-align: middle;
+}
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_body .merchant_table_cell .pref {
+  position: relative;
+  top: -3px;
+  display: inline-block;
+  vertical-align: middle;
+  height: 45px;
+  width: 50px;
+  margin-left: 25px;
+}
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_body .merchant_table_cell .pref.pref_yes {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 20px 20px;
+  background-image: url('https://www.capitalkoala.com/project/public/theme/site_ck/images/icons/favoris-etoile/ck_star-com-favliste.svg');
+}
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_body .merchant_table_cell span.codes_ticket {
+  vertical-align: middle;
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: url('https://www.capitalkoala.com/project/public/theme/site_ck/images/icons/ck_ticket-codes-reduc-petit.svg');
+}
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_body .merchant_table_cell span.codes_ticket h4 {
+  color: #fff;
+  font-size: 18px;
+  line-height: 50px;
+  margin: 0;
+}
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_cell {
+  height: 50px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #006eaf;
+}
+
+#merchant_header_show {
+  width: 100%;
+  display: block;
+  border-bottom: none;
+}
+
+#merchant_link {
+  background: #55d255;
+  height: 42px;
+  display: block;
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  padding-top: 8px;
+  margin-left: 75px;
+}
+
+#merchant_text {
+  width: 100%;
+}
+
+#merchant_increase {
+  text-decoration: line-through;
+  text-align: right;
+  /* width: 82px; */
+}
+
+#merchant_refund {
+  text-align: center;
+  padding-left: 5px;
+  color: #55d255;
+  /* width: 82px; */
+}
+
+.merchant_table_cell {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: none; }
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_header .merchant_table_row {
+  height: initial; }
+
+.merchant_table_row {
+  background-color: #fff; }
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_header .merchant_table_cell {
+  height: initial;
+  font-family: "Ubuntu", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #9a9ea6;
+  padding-top: 15px;
+  padding-bottom: 15px; }
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_cell {
+  height: 50px;
+  padding-bottom: 8px;
+  border-bottom: none; }
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_header .merchant_table_row .merchant_header_name {
+  padding-left: 28px; }
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_header .merchant_table_row .merchant_header_code {
+  padding-right: 28px; }
+
+.merchant_table_header > .merchant_table_row {
+  height: initial !important; }
+
+.tb_result_header {
+  background-color: #fff; }
+
+.merchant_table_body {
+  background-color: #ffffff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table .row {
+  margin: 0;
+  height: 70px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-bottom: 1px solid #eff2f8; }
+  .tb_result .tb_result_data .merchant_list_home .merchant_table .row:hover {
+    -webkit-box-shadow: 0 3px 7px 0 rgba(77, 94, 189, 0.14);
+    box-shadow: 0 3px 7px 0 rgba(77, 94, 189, 0.14); }
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_cell {
+  padding-bottom: 0;
+  border-bottom: none; }
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_body .merchant_table_cell:nth-of-type(1) {
+  margin-left: 28px; }
+.tb_result .tb_result_data .merchant_list_home .merchant_table_body .merchant_table_cell:nth-of-type(3) {
+  margin-right: 28px; }
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_body > .merchant_table_row .merchant_header_remb {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-family: "Ubuntu"; }
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_body > .merchant_table_row .merchant_header_code {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table_body .merchant_table_cell {
+  background-size: contain;
+  background-position: center center; }
+
+#merchant_refund {
+  font-family: "Ubuntu", Arial, Helvetica, sans-serif;
+  color: #5aa3f3;
+  font-size: 18px;
+  font-weight: 700 !important;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #5aa3f3;
+  white-space: nowrap; }
+
+#merchant_promo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  max-width: 30px;
+  max-height: 30px;
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  -ms-flex-item-align: center;
+  align-self: center;
+  justify-self: center;
+  padding: 0;
+  background-color: #5aa3f3;
+  font-family: "Ubuntu";
+  margin-left: 28px; }
+
+.tb_result .tb_result_data {
+  padding: 0; }
+
+.tb_result .tb_result_data .merchant_list_home .merchant_table {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%; }
+
+.table-merchant__name
+{
+    padding-left: 20px;
+}
+
+.table-merchant__td{
+
+    margin: 0;
+    padding: 10px 0;
+    border-collapse: collapse;
+    text-align: center;
+    font-family: "Lato", Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #5aa3f3;
+    
+
+}
+
+.table-merchant__row{
+        box-shadow: inset 0 -1px 0 0 #eff2f8;
+    cursor: pointer;
+}
+
+.reduce_container{
+    margin-right: 25px; 
+    place-content: center; 
+    align-items: center; 
+    font-family: Ubuntu, Arial, Helvetica, sans-serif; 
+    font-size: 15px; 
+    font-style: normal; 
+    font-stretch: normal; 
+    font-weight: 400 !important;
+                cursor: pointer;
+                line-height: 2rem;
+}
+
+.popover_ck {
+  position: absolute;
+  top: 0;
+  z-index: 99999999;
+  display: none;
+  max-width: 276px;
+  padding: 1px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: normal;
+  line-break: auto;
+  line-height: 1.42857143;
+  text-align: left;
+  text-align: start;
+  text-decoration: none;
+  text-shadow: none;
+  text-transform: none;
+  white-space: normal;
+  word-break: normal;
+  word-spacing: normal;
+  word-wrap: normal;
+  font-size: 14px;
+  text-align: center;
+  color: #55d255;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ccc;
+  border: 2px solid #55d255;
+  border-radius: 0;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.popover_ck>.arrow,
+.popover_ck>.arrow:after {
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+}
+
+.popover_ck>.arrow {
+  border-width: 11px;
+}
+
+.popover_ck>.arrow:after {
+  border-width: 10px;
+  content: ""
+}
+
+.popover_ck.bottom>.arrow {
+  left: 50%;
+  margin-left: -11px;
+  border-top-width: 0;
+  border-bottom-color: #55d255;
+  top: -11px;
+}
+
+.popover_ck.bottom>.arrow:after {
+  content: " ";
+  top: 1px;
+  margin-left: -10px;
+  border-top-width: 2px;
+  border-bottom-color: #fff
+}
+
+
+
+.popover_ck-content {
+  padding: 9px 14px;
+}
+
+.crossclose {
+  float: right;
+  margin-right: 5px;
+  cursor: pointer;
+}</style>
+
+<style>
+            .flipX video::-webkit-media-text-track-display {
+                transform: matrix(-1, 0, 0, 1, 0, 0) !important;
+            }
+            .flipXY video::-webkit-media-text-track-display {
+                transform: matrix(-1, 0, 0, -1, 0, 0) !important;
+            }
+            .flipXYX video::-webkit-media-text-track-display {
+                transform: matrix(1, 0, 0, -1, 0, 0) !important;
+            }</style><style>
+            @keyframes blinkWarning {
+                0% { color: red; }
+                100% { color: white; }
+            }
+            @-webkit-keyframes blinkWarning {
+                0% { color: red; }
+                100% { color: white; }
+            }
+            .blinkWarning {
+                -webkit-animation: blinkWarning 1s linear infinite;
+                -moz-animation: blinkWarning 1s linear infinite;
+                animation: blinkWarning 1s linear infinite;
+            }</style><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Petit guide pratique avec ressources pour peaufiner un LLM _ Coffee bytes_files/m=el_main_css"><link async="" rel="stylesheet" href="./Petit guide pratique avec ressources pour peaufiner un LLM _ Coffee bytes_files/style.bundle.min.88dd31d932cb0bef5010c1fa144133433b998dde895715068b41bdb1ead43f27.css" integrity="sha256-iN0x2TLLC+9QEMH6FEEzQzuZjd6JVxUGi0G9serUPyc="><script defer="" src="./Petit guide pratique avec ressources pour peaufiner un LLM _ Coffee bytes_files/main.78fa9c345e75e54affe1efd758a812b8cb9bfc87ba5a2e8f1025b769bac1dffb.js.téléchargement"></script><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="alternate" href="https://coffeebytes.dev/es/fine-tuning-de-un-llm-guia-practica-con-recursos/" hreflang="es"><link rel="dns-prefetch" href="https://www.googletagmanager.com/"><link href="https://www.googletagmanager.com/gtag/js?id=GTM-5F4NMW3" rel="preload" as="script"><title>Petit guide pratique avec ressources pour peaufiner un LLM | Coffee bytes</title><meta name="robots" content="index, follow"><meta name="title" content="Fine-Tuning A LLM Small Practical Guide With Resources"><meta name="description" content="A short practical guide on the process of fine-tuning a LLM and useful resources to do so according to my experience training Mistral 7B available on HuggingFace"><meta name="author" content="Eduardo Zepeda"><meta property="og:type" content="article"><meta property="og:site_name" content="Coffee bytes"><meta property="article:author" content="Eduardo Zepeda"><meta property="article:published_time" content="2025-02-17T00:00:00Z"><meta property="article:modified_time" content="2025-02-27T20:17:21Z"><meta http-equiv="content-language" name="language" content="en"><meta property="og:locale" content="en"><meta property="og:url" content="https://coffeebytes.dev/en/fine-tuning-a-llm-small-practical-guide-with-resources/"><meta property="og:title" content="Fine-Tuning A LLM Small Practical Guide With Resources"><meta property="og:description" content="A short practical guide on the process of fine-tuning a LLM and useful resources to do so according to my experience training Mistral 7B available on HuggingFace"><meta property="og:image" content="https://coffeebytes.dev/en/fine-tuning-a-llm-small-practical-guide-with-resources/images/Fine-Tuning-LLM-Short-Guide.jpg"><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://coffeebytes.dev/en/fine-tuning-a-llm-small-practical-guide-with-resources/"><meta property="twitter:title" content="Fine-Tuning A LLM Small Practical Guide With Resources"><meta property="twitter:description" content="A short practical guide on the process of fine-tuning a LLM and useful resources to do so according to my experience training Mistral 7B available on HuggingFace"><meta property="twitter:image" content="https://coffeebytes.dev/en/fine-tuning-a-llm-small-practical-guide-with-resources/images/Fine-Tuning-LLM-Short-Guide.jpg"><link rel="canonical" href="https://coffeebytes.dev/en/fine-tuning-a-llm-small-practical-guide-with-resources/"><link rel="alternate" type="application/json" href="https://coffeebytes.dev/en/fine-tuning-a-llm-small-practical-guide-with-resources/index.json" title="Les octets de café"><link rel="alternate" type="application/rss+xml" href="https://coffeebytes.dev/en/fine-tuning-a-llm-small-practical-guide-with-resources/index.xml" title="Les octets de café"><meta http-equiv="Content-Security-Policy" content=" child-src &#39;self&#39;; font-src *; form-action &#39;self&#39; https://dev.us17.list-manage.com; frame-ancestors &#39;self&#39;; frame-src &#39;self&#39; *.twitter.com *.x.com *.youtube.com  *.googletagmanager.com *.doubleclick.net *.google.com https://ep2.adtrafficquality.google/sodar/sodar2/232/runner.html; img-src *; object-src &#39;self&#39;; script-src &#39;self&#39; &#39;unsafe-inline&#39; *.cloudflare.com *.doubleclick.net https://platform.twitter.com https://cdn.syndication.twimg.com *.amazon.com *.amazon-adsystem.com https://www.google-analytics.com *.google https://www.google.com https://pagead2.googlesyndication.com https://adservice.google.com https://www.googletagservices.com jsfiddle.net *.instagram.com *.twitter.com *.x.com *.googletagmanager.com https://unpkg.com/@iconify-json/logos@1/icons.json data: pagead2.googlesyndication.com storage.googleapis.com googleads.g.doubleclick.net ajax.googleapis.com; style-src &#39;self&#39; &#39;unsafe-inline&#39;;"></head><body id="hamburger-grid">
+    
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5F4NMW3"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <aside aria-label="Menu latéral" id="sidebar" class="sidebarHidden">
+    
+    <div role="navigation" aria-label="Fermer le menu latéral" id="close-icon" class="close" tabindex="0"></div>
+    <ul class="nav-menu-sidebar">
+    <li class="dropdown nav-link">
+        <button class="dropbtn"><svg class="social-icon language-solid-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M152.1 236.2c-3.5-12.1-7.8-33.2-7.8-33.2h-.5s-4.3 21.1-7.8 33.2l-11.1 37.5H163zM616 96H336v320h280c13.3 0 24-10.7 24-24V120c0-13.3-10.7-24-24-24zm-24 120c0 6.6-5.4 12-12 12h-11.4c-6.9 23.6-21.7 47.4-42.7 69.9 8.4 6.4 17.1 12.5 26.1 18 5.5 3.4 7.3 10.5 4.1 16.2l-7.9 13.9c-3.4 5.9-10.9 7.8-16.7 4.3-12.6-7.8-24.5-16.1-35.4-24.9-10.9 8.7-22.7 17.1-35.4 24.9-5.8 3.5-13.3 1.6-16.7-4.3l-7.9-13.9c-3.2-5.6-1.4-12.8 4.2-16.2 9.3-5.7 18-11.7 26.1-18-7.9-8.4-14.9-17-21-25.7-4-5.7-2.2-13.6 3.7-17.1l6.5-3.9 7.3-4.3c5.4-3.2 12.4-1.7 16 3.4 5 7 10.8 14 17.4 20.9 13.5-14.2 23.8-28.9 30-43.2H412c-6.6 0-12-5.4-12-12v-16c0-6.6 5.4-12 12-12h64v-16c0-6.6 5.4-12 12-12h16c6.6 0 12 5.4 12 12v16h64c6.6 0 12 5.4 12 12zM0 120v272c0 13.3 10.7 24 24 24h280V96H24c-13.3 0-24 10.7-24 24zm58.9 216.1L116.4 167c1.7-4.9 6.2-8.1 11.4-8.1h32.5c5.1 0 9.7 3.3 11.4 8.1l57.5 169.1c2.6 7.8-3.1 15.9-11.4 15.9h-22.9a12 12 0 0 1 -11.5-8.6l-9.4-31.9h-60.2l-9.1 31.8c-1.5 5.1-6.2 8.7-11.5 8.7H70.3c-8.2 0-14-8.1-11.4-15.9z"></path></svg><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Langues</font></font></button>
+        <div class="dropdown-content">
+            
+            <a class="dropdown-menu-item" aria-label="Langue : Anglais" href="https://coffeebytes.dev/en/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Anglais</font></font></a>
+            
+            <a class="dropdown-menu-item" aria-label="Langue: Espagnol" href="https://coffeebytes.dev/es/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Espagnol</font></font></a>
+            
+        </div>
+    </li>
+    <li class="dropdown nav-link">
+        <div><a aria-label="Lien vers la liste des catégories" href="https://coffeebytes.dev/en/categories/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Catégories</font></font></a></div>
+        <div class="dropdown-content dropdown-categories">
+            <ul class="category-list">
+    
+    <li class="dropdown-category-item"><a title="algorithmes" aria-label="" href="https://coffeebytes.dev/en/categories/algorithms/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Algorithmes</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="intelligence artificielle" aria-label="" href="https://coffeebytes.dev/en/categories/artificial-intelligence/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Intelligence artificielle</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="bases de données" aria-label="" href="https://coffeebytes.dev/en/categories/databases/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Bases de données</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="Django" aria-label="" href="https://coffeebytes.dev/en/categories/django/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Django</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="docker" aria-label="" href="https://coffeebytes.dev/en/categories/docker/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="fastapi" aria-label="" href="https://coffeebytes.dev/en/categories/fastapi/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fastapi</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="git" aria-label="" href="https://coffeebytes.dev/en/categories/git/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Git</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="aller" aria-label="" href="https://coffeebytes.dev/en/categories/go/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Aller</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="htmx" aria-label="" href="https://coffeebytes.dev/en/categories/htmx/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HTML</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="javascript" aria-label="" href="https://coffeebytes.dev/en/categories/javascript/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Javascript</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="Linux et Devops" aria-label="" href="https://coffeebytes.dev/en/categories/linux-and-devops/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Linux et DevOps</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="avis" aria-label="" href="https://coffeebytes.dev/en/categories/opinions/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Avis</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="python" aria-label="" href="https://coffeebytes.dev/en/categories/python/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Python</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="réagir" aria-label="" href="https://coffeebytes.dev/en/categories/react/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Réagir</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="rouiller" aria-label="" href="https://coffeebytes.dev/en/categories/rust/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Rouiller</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="référencement" aria-label="" href="https://coffeebytes.dev/en/categories/seo/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Référencement</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="architecture logicielle" aria-label="" href="https://coffeebytes.dev/en/categories/software-architecture/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Architecture logicielle</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="essai" aria-label="" href="https://coffeebytes.dev/en/categories/testing/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Essai</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="manuscrit" aria-label="" href="https://coffeebytes.dev/en/categories/typescript/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Manuscrit</font></font></a></li>
+    
+</ul>
+        </div>
+    </li>
+    <li class="nav-link">
+    <a class="" href="https://coffeebytes.dev/en/pages/lets-work-together/" aria-label="Menu embauchez-moi"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        
+        Engagez-moi
+    </font></font></a>
+    </li>
+    
+    <li class="nav-link">
+    <a class="" href="https://coffeebytes.dev/en/index.xml" aria-label="Menu RSS"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        
+        RSS
+    </font></font></a>
+    </li>
+    
+    <li class="nav-link">
+    <a class="" href="https://coffeebytes.dev/en/authors/eduardo-zepeda/" aria-label="Menu à propos de moi"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        
+        Sur moi
+    </font></font></a>
+    </li>
+    
+    
+    <li class="nav-link"><a href="https://coffeebytes.dev/en/search" aria-label="Recherche"><svg class="social-icon search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path></svg></a></li>
+    
+</ul>
+</aside>
+<div role="button" aria-label="Faites défiler vers le haut" id="scroll-up" class="scroll-up" tabindex="0">
+    
+    <svg class="toggle-theme-icon arrow-up-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z"></path></svg>
+</div>
+<nav id="nav" role="navigation" aria-label="Menu principal">
+    <div id="burger-icon" class="nav-burger" tabindex="0">
+    <div class="burger-line"></div>
+    <div class="burger-line"></div>
+    <div class="burger-line"></div>
+</div>
+    <section class="nav-menu" aria-label="Barre de navigation">
+    <ul class="nav-menu-ul">
+        <li class="dropdown nav-link">
+            <div class="dropbtn"><svg class="social-icon language-solid-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M152.1 236.2c-3.5-12.1-7.8-33.2-7.8-33.2h-.5s-4.3 21.1-7.8 33.2l-11.1 37.5H163zM616 96H336v320h280c13.3 0 24-10.7 24-24V120c0-13.3-10.7-24-24-24zm-24 120c0 6.6-5.4 12-12 12h-11.4c-6.9 23.6-21.7 47.4-42.7 69.9 8.4 6.4 17.1 12.5 26.1 18 5.5 3.4 7.3 10.5 4.1 16.2l-7.9 13.9c-3.4 5.9-10.9 7.8-16.7 4.3-12.6-7.8-24.5-16.1-35.4-24.9-10.9 8.7-22.7 17.1-35.4 24.9-5.8 3.5-13.3 1.6-16.7-4.3l-7.9-13.9c-3.2-5.6-1.4-12.8 4.2-16.2 9.3-5.7 18-11.7 26.1-18-7.9-8.4-14.9-17-21-25.7-4-5.7-2.2-13.6 3.7-17.1l6.5-3.9 7.3-4.3c5.4-3.2 12.4-1.7 16 3.4 5 7 10.8 14 17.4 20.9 13.5-14.2 23.8-28.9 30-43.2H412c-6.6 0-12-5.4-12-12v-16c0-6.6 5.4-12 12-12h64v-16c0-6.6 5.4-12 12-12h16c6.6 0 12 5.4 12 12v16h64c6.6 0 12 5.4 12 12zM0 120v272c0 13.3 10.7 24 24 24h280V96H24c-13.3 0-24 10.7-24 24zm58.9 216.1L116.4 167c1.7-4.9 6.2-8.1 11.4-8.1h32.5c5.1 0 9.7 3.3 11.4 8.1l57.5 169.1c2.6 7.8-3.1 15.9-11.4 15.9h-22.9a12 12 0 0 1 -11.5-8.6l-9.4-31.9h-60.2l-9.1 31.8c-1.5 5.1-6.2 8.7-11.5 8.7H70.3c-8.2 0-14-8.1-11.4-15.9z"></path></svg><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Langues</font></font></div>
+            <div class="dropdown-content">
+                
+                <a class="dropdown-menu-item" aria-label="Langue : Anglais" href="https://coffeebytes.dev/en/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Anglais</font></font></a>
+                
+                <a class="dropdown-menu-item" aria-label="Langue: Espagnol" href="https://coffeebytes.dev/es/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Espagnol</font></font></a>
+                
+            </div>
+        </li>
+        
+        
+        <li class="dropdown nav-link">
+            <div><a aria-label="Lien vers la liste des catégories" href="https://coffeebytes.dev/en/categories/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Catégories</font></font></a></div>
+            <div class="dropdown-content dropdown-categories">
+                <ul class="category-list">
+    
+    <li class="dropdown-category-item"><a title="algorithmes" aria-label="" href="https://coffeebytes.dev/en/categories/algorithms/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Algorithmes</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="intelligence artificielle" aria-label="" href="https://coffeebytes.dev/en/categories/artificial-intelligence/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Intelligence artificielle</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="bases de données" aria-label="" href="https://coffeebytes.dev/en/categories/databases/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Bases de données</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="Django" aria-label="" href="https://coffeebytes.dev/en/categories/django/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Django</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="docker" aria-label="" href="https://coffeebytes.dev/en/categories/docker/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="fastapi" aria-label="" href="https://coffeebytes.dev/en/categories/fastapi/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fastapi</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="git" aria-label="" href="https://coffeebytes.dev/en/categories/git/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Git</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="aller" aria-label="" href="https://coffeebytes.dev/en/categories/go/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Aller</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="htmx" aria-label="" href="https://coffeebytes.dev/en/categories/htmx/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HTML</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="javascript" aria-label="" href="https://coffeebytes.dev/en/categories/javascript/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Javascript</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="Linux et Devops" aria-label="" href="https://coffeebytes.dev/en/categories/linux-and-devops/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Linux et DevOps</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="avis" aria-label="" href="https://coffeebytes.dev/en/categories/opinions/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Avis</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="python" aria-label="" href="https://coffeebytes.dev/en/categories/python/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Python</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="réagir" aria-label="" href="https://coffeebytes.dev/en/categories/react/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Réagir</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="rouiller" aria-label="" href="https://coffeebytes.dev/en/categories/rust/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Rouiller</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="référencement" aria-label="" href="https://coffeebytes.dev/en/categories/seo/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Référencement</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="architecture logicielle" aria-label="" href="https://coffeebytes.dev/en/categories/software-architecture/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Architecture logicielle</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="essai" aria-label="" href="https://coffeebytes.dev/en/categories/testing/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Essai</font></font></a></li>
+    
+    <li class="dropdown-category-item"><a title="manuscrit" aria-label="" href="https://coffeebytes.dev/en/categories/typescript/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Manuscrit</font></font></a></li>
+    
+</ul>
+            </div>
+        </li>
+        
+        <li>
+            <a class="" href="https://coffeebytes.dev/en/pages/lets-work-together/" aria-label="Engagez-moi"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                
+                Engagez-moi
+            </font></font></a>
+        </li>
+        
+        <li>
+            <a class="" href="https://coffeebytes.dev/en/index.xml" aria-label="RSS"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                
+                RSS
+            </font></font></a>
+        </li>
+        
+        <li>
+            <a class="" href="https://coffeebytes.dev/en/authors/eduardo-zepeda/" aria-label="Sur moi"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                
+                Sur moi
+            </font></font></a>
+        </li>
+        
+        
+        <li>
+            <a href="https://coffeebytes.dev/en/search" class="search-icon" title="Recherche" aria-label="Recherche"><svg class="social-icon search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path></svg></a>
+        </li>
+        
+    </ul>
+</section>
+    <div class="theme-toggle"> <input id="toggle-switch" type="checkbox" checked="">
+<label aria-label="Basculer le thème" id="toggle-label" for="toggle-switch" tabindex="0">
+    <svg class="toggle-theme-icon moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23A258.156 258.156 0 0 0 283.211 0c-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z"></path></svg>
+    <svg class="toggle-theme-icon sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 160c-52.9 0-96 43.1-96 96s43.1 96 96 96 96-43.1 96-96-43.1-96-96-96zm246.4 80.5l-94.7-47.3 33.5-100.4c4.5-13.6-8.4-26.5-21.9-21.9l-100.4 33.5-47.4-94.8c-6.4-12.8-24.6-12.8-31 0l-47.3 94.7L92.7 70.8c-13.6-4.5-26.5 8.4-21.9 21.9l33.5 100.4-94.7 47.4c-12.8 6.4-12.8 24.6 0 31l94.7 47.3-33.5 100.5c-4.5 13.6 8.4 26.5 21.9 21.9l100.4-33.5 47.3 94.7c6.4 12.8 24.6 12.8 31 0l47.3-94.7 100.4 33.5c13.6 4.5 26.5-8.4 21.9-21.9l-33.5-100.4 94.7-47.3c13-6.5 13-24.7.2-31.1zm-155.9 106c-49.9 49.9-131.1 49.9-181 0-49.9-49.9-49.9-131.1 0-181 49.9-49.9 131.1-49.9 181 0 49.9 49.9 49.9 131.1 0 181z"></path></svg>
+</label>
+    </div>
+</nav><header id="header">
+    <div id="site-info">
+        
+        <section aria-label="" class="site-info-container">
+            <p class="site-name"><a href="https://coffeebytes.dev/en/" aria-label="La maison de Coffee Bytes"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Les octets de café</font></font></a></p>
+            <p class="site-description"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tutoriels et avis acidulés sur le développement web, la programmation et la technologie</font></font></p>
+        </section>
+        
+    </div>
+</header><main id="main">
+        <div class="main">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@graph": [
+        {
+        "@type": "WebPage",
+        "@id": "https://coffeebytes.dev/en/fine-tuning-a-llm-small-practical-guide-with-resources/#webpage",
+        "url": "https://coffeebytes.dev/en/fine-tuning-a-llm-small-practical-guide-with-resources/",
+        "name": "Fine-Tuning A LLM Small Practical Guide With Resources",
+        "isPartOf": {
+            "@id": "https://coffeebytes.dev/#website"
+        },
+        
+        "inLanguage": "en",
+        "potentialAction": [
+            {
+                "@type": "ReadAction",
+                "target": [
+                    "https://coffeebytes.dev/en/fine-tuning-a-llm-small-practical-guide-with-resources/"
+                ]
+            }
+        ]
+},
+        {
+    "@type": "WebSite",
+    "@id": "https://coffeebytes.dev/#website",
+    "url": "https://coffeebytes.dev/",
+    "name": "Coffee bytes",
+    "description": "",
+    "publisher": {
+        "@id": "https://coffeebytes.dev/#organization"
+    },
+    "inLanguage": "en"
+},
+        {
+"@type": "Organization",
+"@id": "https://coffeebytes.dev/#organization",
+"name": "Coffee bytes",
+"url": "https://coffeebytes.dev/"
+},
+        {
+    "@type": "Blog",
+    "@id": "https://coffeebytes.dev/#blog",
+    "name": "Coffee bytes",
+    "url": "https://coffeebytes.dev/",
+    "description": "Tutorials and acid opinions about web development, programming and technology",
+    "thumbnailUrl": "https://coffeebytes.dev/",
+    "license": "© All rights reserved",
+    "mainEntityOfPage": {
+        "@id": "https://coffeebytes.dev/en/fine-tuning-a-llm-small-practical-guide-with-resources/#webpage"
+    },
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://coffeebytes.dev/en/search?q={q}",
+          "actionPlatform": [
+            "http://schema.org/DesktopWebPlatform",
+            "http://schema.org/MobileWebPlatform"
+          ]
+        },
+        "query-input": "required name={q}"
+    }
+},
+            {
+    "@type": "Person",
+    "@id": "https://coffeebytes.dev/en/authors/eduardo-zepeda/#author",
+    "name": "Eduardo Zepeda",
+    "url": "https://coffeebytes.dev/en/authors/eduardo-zepeda/",
+    "image": "https://res.cloudinary.com/dwrscezd2/image/upload/v1716531649/web-dev-profile-picture_ypb9hn.jpg",
+    "sameAs": [
+        
+        
+        "https://linkedin.com/in/eduardomzepeda",
+        
+        "https://codewars.com/users/EduardoZepeda",
+        "https://instagram.com/zeedu.dev"
+  ],
+  "description": "Web developer and GNU/Linux enthusiast. I believe in choosing the right tool for the job and that simplicity is the ultimate sophistication. Better done than perfect. I also believe in the goodness of cryptocurrencies outside of monetary speculation.",
+  "jobTitle": "Web developer",
+  "worksFor": {
+      "@id": "https://coffeebytes.dev/#organization"
+  },
+  "memberOf": {
+      "@id": "https://coffeebytes.dev/#organization"
+  }
+}
+,
+        
+        
+        {
+            "@type": "BlogPosting",
+            "articleSection": "posts",
+            "articleBody": "I tried to fine-tune a DeepSeek model but failed, then I tried to do it with Llama and I couldn\u0026rsquo;t make it work, finally I managed to do it with a Mistral model, specifically the 7B parameter model.\nI share with you some resources that I found useful during the process and some of my notes related to the topic. Still, don\u0026rsquo;t get confused by this, I still believe that we are in an AI bubble .\nWhere to learn the basics of AI and Neural networks? If you have no idea about artificial intelligence or what a neural network is, the most complete and didactic videos belong to 3blue1brown.\nHowever, it is important to clarify that these videos do not start from scratch, it is necessary that you have a background in linear algebra, linear regression and differential and integral calculus. I know it can be a little discouraging for those who come from non-technical backgrounds but it is not as difficult as it seems.\nIf you only speak english you probably don\u0026rsquo;t know DotCSV, but what you may not know is that DotCSV has an introduction to neural networks and their videos are excellent, the bad part of course is that his videos are in Spanish. Go look for your duolinguo App.\nBut if you already know about neural networks, then, let\u0026rsquo;s start with the fine-tuning concept.\nWhat is fine-tuning? Fine-tuning is the procedure of selecting an already trained model and continuing its training on a particular data set from the field. Like for example a LLM that has been trained specifically in scientific articles about diabetes.\nBecause, why use prompt engineering when you can fine-tune a model and get the same results?\nI\u0026#39;m just kidding, always try prompt engineering first Most current LLM models exhibit quite positive overall performance, but fail to solve particular problems focused on specific tasks. The fine-tuning procedure provides significant benefits, such as decreased computational costs and the opportunity to use advanced models without the need to build one from scratch. It may not replace programmers but fine-tuning can turn a model into the ultimate prediction tool in an area of knowledge.\nSteps needed to fine-tune an LLM The steps may vary according to the model but generally the process looks something like this:\nLoad a dataset: Gather your dataset, either existing or original. Data preprocessing: Tokenize your dataset using model tokenizer and split it into training, validation and test sets. Model selection: Choose a pre-trained LLM. Parameter configuration: Configure the hyperparameters. Training or Fine-Tuning: Train the model on the customized dataset. Evaluation: Test it with the test set. Inference: Deploy the fine-tuned model for inference on new data, making sure it generalizes well to unseen inputs. Here are some resources about fine-tuning:\nI loved this resource for understanding the general steps to fine-tuning an LLM .\nThe notebook that I used to fine-tune the model is here and you can check it.\nWhere to get datasets for fine-tuning an LLM? In the same way you need data to train an AI model, fine-tuning requires that you provide it with the best data can you find, the best source is your own data.\nI used datasets from HuggingFace , however it is important to consider that pre-trained models that are freely available were probably trained using the same data, so if you decide to use them, don\u0026rsquo;t expect to have a substantial improvement over normal model performance, it would be best to use your own data or original content.\nAwesome public datasets Kaggle opendatainception Make sure your dataset is in a proper format. Eg, I had to convert one using Python to JSONL, because each line was a separate file, which made the import incredibly slow.\nWhich models are best for fine-tuning an LLM? To do fine-tuning, a good starting point is using a pre-trained LLM, the most parameters the better results but its performance will be worse.\nAs a rule of thumb, it\u0026rsquo;s a good idea to browse HuggingFace, and look for large models, among the most popular ones I could find are Llama, DeepSeek, Mistral, Falcon, among others.\nI tested the following models because they were very light and did not require as much computing power, but you can use their larger versions with more parameters:\nLlama-3.1B DeepSeek-R1-Distill-Qwen-1.5B Mistral-7B-v0.x I got better results with the Mistral LLMs, probably because the DeepSeek ones were trained using Chinese sources.\nI was actually able to train and deploy it but the model returned Chinese characters, just like Searle\u0026rsquo;s room , from time to time as part of the response, although it was incredibly fast.\nWhere to fine-tune an LLM for free? It would be best to have your own GPUs, but in case you can\u0026rsquo;t, Google, through Google Colab has GPUs available for free for a limited amount of hours per day, Kaggle also offers you 30 hours of GPU usage per week to run your experiments. And create your furry images using the forbidden models.\nIn my fine-tuning adventure I also found a company called salad , which serves as an intermediary between users and gamers who want to rent their GPUs, the prices are incredibly competitive. VastAI is also another option. Digital Ocean also has very competitive prices and provices a wide variety of GPUs.\nLLM Fine-tuning Tutorials For Fine-tuning I found these videos quite enjoyable, and straight to the point, however I could not produce a working model, it is possible that the notebooks were outdated and probably my inexperience made it impossible to get it.\nThis is a good introduction but does not share the notebook, although I was able to find it on Google Colab, I put the link in the next section.\nHe is a bit more specific and also gets right to the point.\nWhere to start with Machine Learning and AI Ad My recommendation is this tiny hundred page book on Machine Learning, it deals with the basis of machine learning and all the math required to understand how AI models are trained. Don\u0026#39;t be foolished by its size, it\u0026#39;s dense, definitely it\u0026#39;s not a walk in the park. The book is so short because it leaves away all the filler and keeps only the crucial parts of Machine Learning. Warning: It contains lots of equations and it\u0026#39;s not exactly one hundred pages but a little bit more.\nCheck The Hundred-Page Machine Learning Book Price and buy it on Amazon\nHow to design good software? Ad Forget about Clean Code and read this book instead. Why? writing good software is hard because the definition of good software is highly variable, this books deals with that question in deep. Throughout the book you\u0026#39;ll learn about complexity and its flow, abstractions, information hiding and the \u0026#39;metas\u0026#39; of programming. IMO A philosophy of software design goes beyond what Clean Code has to offer, sorry uncle Bob.\nCheck A philosophy of software design price and buy it on Amazon\nNotebooks for LLM fine-tuning. This was the notebook that allowed me to fine-tuning the Mistral model , with a couple of modifications, of course.\nMost of the notebooks just need you to change the model and adapt the dataset to the model input, so you can use them as a starting point for your particular case.\nOthers that I found particularly useful but did not work for me or produced unwanted results.\nFine-tuning DeepSeek R1 Alpaca + Flame fine-tuning Where to deploy an LLM model? After creating your model you may want to make it available to others.\nGenerally there are tools like Gradio that abstract the process of generating a chat server like OpenAI, you can set them up on your own or use the ones available from HuggingFace, although obviously for a monthly cost, the free plans only have CPU and RAM, so it is usually not enough to run your LLM, especially the big ones.\nSince my project was for educational purposes and I don\u0026rsquo;t want to pay for a premium plan, I decided to put the code necessary to run my model in a GoogleColab notebook with the necessary code to run it. ",
+            "name": "Fine-Tuning A LLM Small Practical Guide With Resources",
+            "headline": "Fine-Tuning A LLM Small Practical Guide With Resources",
+            "alternativeHeadline":  null ,
+            "description": "A short practical guide on the process of fine-tuning a LLM and useful resources to do so according to my experience training Mistral 7B available on HuggingFace",
+            "inLanguage": "en",
+            "mainEntityOfPage": {
+                "@id": "https://coffeebytes.dev/en/fine-tuning-a-llm-small-practical-guide-with-resources/#webpage"
+            },
+            "isPartOf": {
+                "@id": "https://coffeebytes.dev/#blog"
+            },
+            "author" : [{"@id":"https://coffeebytes.dev/en/authors/eduardo-zepeda/#author"}],
+            "creator" : [{"@id":"https://coffeebytes.dev/en/authors/eduardo-zepeda/#author"}],
+            "accountablePerson" : [{"@id":"https://coffeebytes.dev/en/authors/eduardo-zepeda/#author"}],
+            "copyrightHolder" : [{"@id":"https://coffeebytes.dev/en/authors/eduardo-zepeda/#author"}],
+            "copyrightYear" : "2025",
+            "dateCreated": "2025-02-17T00:00:00.00Z",
+            "datePublished": "2025-02-17T00:00:00.00Z",
+            "dateModified": "2025-02-27T20:17:21.42Z",
+            "publisher":{
+                "@type":"Organization",
+                "name": "Coffee bytes",
+                "url": "https://coffeebytes.dev/",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://coffeebytes.dev/",
+                    "width":"32",
+                    "height":"32"
+                }
+            },
+            
+            "image": ["https://coffeebytes.dev/en/fine-tuning-a-llm-small-practical-guide-with-resources/images/Fine-Tuning-LLM-Short-Guide.jpg"],
+            "url" : "https://coffeebytes.dev/en/fine-tuning-a-llm-small-practical-guide-with-resources/",
+            "wordCount" :  1356 ,
+            "genre" : [ "artificial intelligence" , "opinions" ],
+            "keywords" : [ "artificial intelligence" ],
+            "isAccessibleForFree":  true ,
+            "isFamilyFriendly":  true ,
+                "audience": {
+                    "@type": "Audience",
+                    "name": "Web developers"
+                }
+            
+        }
+    ]
+}
+</script>
+<div class="page-content-container">
+    <div class="post-container">
+        
+
+
+
+
+
+
+        <section aria-label="" class="post-toc">
+            
+<details>
+    <summary><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Table des matières</font></font></summary>
+    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Petit guide pratique avec ressources pour peaufiner un LLM</font></font></p>
+    <div class="summary"><nav id="TableOfContents">
+  <ul>
+    <li><a href="https://coffeebytes.dev/en/fine-tuning-a-llm-small-practical-guide-with-resources/#where-to-learn-the-basics-of-ai-and-neural-networks"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Où apprendre les bases de l'IA et des réseaux neuronaux ?</font></font></a></li>
+    <li><a href="https://coffeebytes.dev/en/fine-tuning-a-llm-small-practical-guide-with-resources/#what-is-fine-tuning"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Qu'est-ce que le réglage fin ?</font></font></a>
+      <ul>
+        <li><a href="https://coffeebytes.dev/en/fine-tuning-a-llm-small-practical-guide-with-resources/#steps-needed-to-fine-tune-an-llm"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Étapes nécessaires pour peaufiner un LLM</font></font></a></li>
+      </ul>
+    </li>
+    <li><a href="https://coffeebytes.dev/en/fine-tuning-a-llm-small-practical-guide-with-resources/#where-to-get-datasets-for-fine-tuning-an-llm"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Où obtenir des ensembles de données pour peaufiner un LLM ?</font></font></a></li>
+    <li><a href="https://coffeebytes.dev/en/fine-tuning-a-llm-small-practical-guide-with-resources/#which-models-are-best-for-fine-tuning-an-llm"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Quels modèles sont les plus adaptés pour peaufiner un LLM ?</font></font></a></li>
+    <li><a href="https://coffeebytes.dev/en/fine-tuning-a-llm-small-practical-guide-with-resources/#where-to-fine-tune-an-llm-for-free"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Où peaufiner un LLM gratuitement ?</font></font></a></li>
+    <li><a href="https://coffeebytes.dev/en/fine-tuning-a-llm-small-practical-guide-with-resources/#llm-fine-tuning-tutorials"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tutoriels de perfectionnement du LLM</font></font></a></li>
+    <li><a href="https://coffeebytes.dev/en/fine-tuning-a-llm-small-practical-guide-with-resources/#notebooks-for-llm-fine-tuning"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cahiers pour peaufiner le LLM.</font></font></a></li>
+    <li><a href="https://coffeebytes.dev/en/fine-tuning-a-llm-small-practical-guide-with-resources/#where-to-deploy-an-llm-model"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Où déployer un modèle LLM ?</font></font></a></li>
+  </ul>
+</nav></div>
+</details>
+
+        </section>
+        <article class="post">
+            <h1><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Petit guide pratique avec ressources pour peaufiner un LLM</font></font></h1>
+            
+
+<section aria-label="" class="post-metadata">
+    <div class="author-list">
+    
+</div>
+    <div class="published-date"><time datetime=" 2025-02-17"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">17 février 2025</font></font></time>
+</div>
+        
+<div class="i18n-container">
+    <div class="i18n-list"><svg class="social-icon language-solid-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M152.1 236.2c-3.5-12.1-7.8-33.2-7.8-33.2h-.5s-4.3 21.1-7.8 33.2l-11.1 37.5H163zM616 96H336v320h280c13.3 0 24-10.7 24-24V120c0-13.3-10.7-24-24-24zm-24 120c0 6.6-5.4 12-12 12h-11.4c-6.9 23.6-21.7 47.4-42.7 69.9 8.4 6.4 17.1 12.5 26.1 18 5.5 3.4 7.3 10.5 4.1 16.2l-7.9 13.9c-3.4 5.9-10.9 7.8-16.7 4.3-12.6-7.8-24.5-16.1-35.4-24.9-10.9 8.7-22.7 17.1-35.4 24.9-5.8 3.5-13.3 1.6-16.7-4.3l-7.9-13.9c-3.2-5.6-1.4-12.8 4.2-16.2 9.3-5.7 18-11.7 26.1-18-7.9-8.4-14.9-17-21-25.7-4-5.7-2.2-13.6 3.7-17.1l6.5-3.9 7.3-4.3c5.4-3.2 12.4-1.7 16 3.4 5 7 10.8 14 17.4 20.9 13.5-14.2 23.8-28.9 30-43.2H412c-6.6 0-12-5.4-12-12v-16c0-6.6 5.4-12 12-12h64v-16c0-6.6 5.4-12 12-12h16c6.6 0 12 5.4 12 12v16h64c6.6 0 12 5.4 12 12zM0 120v272c0 13.3 10.7 24 24 24h280V96H24c-13.3 0-24 10.7-24 24zm58.9 216.1L116.4 167c1.7-4.9 6.2-8.1 11.4-8.1h32.5c5.1 0 9.7 3.3 11.4 8.1l57.5 169.1c2.6 7.8-3.1 15.9-11.4 15.9h-22.9a12 12 0 0 1 -11.5-8.6l-9.4-31.9h-60.2l-9.1 31.8c-1.5 5.1-6.2 8.7-11.5 8.7H70.3c-8.2 0-14-8.1-11.4-15.9z"></path></svg><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Traductions:</font></font></strong></div>
+    <ul class="i18n-posts">
+        
+        <li class="i18n-post">
+            <a title="Fine-Tuning De Un LLM Guide Pratique Avec Recursos" aria-label="Version traduite : Espagnol" href="https://coffeebytes.dev/es/fine-tuning-de-un-llm-guia-practica-con-recursos/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- es: Fine-Tuning De Un LLM Guía Practica Con Recursos</font></font></a>
+        </li>
+        
+    </ul>
+</div>
+
+    
+<div aria-label="Temps de lecture : 7 minutes" class="reading-time"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">⏲ ​​Temps de lecture : 7 minutes</font></font></div>
+    <div class="post-categories">
+    
+    <a class="post-category" aria-label="Lien de catégorie vers les articles sur : Intelligence artificielle" title="Lien de catégorie vers les articles sur : Intelligence artificielle" href="https://coffeebytes.dev/en/categories/artificial-intelligence"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Intelligence artificielle</font></font></a>
+    
+    <a class="post-category" aria-label="Lien de catégorie vers les articles sur : Opinions" title="Lien de catégorie vers les articles sur : Opinions" href="https://coffeebytes.dev/en/categories/opinions"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Avis</font></font></a>
+    
+</div>
+</section>
+            
+            <div class="content"><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">J'ai essayé d'affiner un modèle DeepSeek mais j'ai échoué, puis j'ai essayé de le faire avec Llama et je n'ai pas réussi à le faire fonctionner, finalement j'ai réussi à le faire avec un modèle Mistral, en particulier le modèle à paramètres 7B.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Je partage avec vous quelques ressources que j'ai trouvées utiles au cours du processus et certaines de mes notes liées au sujet. Cependant, ne vous laissez pas tromper par cela, je crois toujours que 
+
+ </font></font><a class="markdown-link" href="https://coffeebytes.dev/en/the-rise-and-fall-of-the-ai-bubble/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">nous sommes dans une bulle d'IA</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+.</font></font></p>
+<h2 id="where-to-learn-the-basics-of-ai-and-neural-networks"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Où apprendre les bases de l'IA et des réseaux neuronaux ?</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Si vous n'avez aucune idée de l'intelligence artificielle ou de ce qu'est un réseau neuronal, les vidéos les plus complètes et les plus didactiques appartiennent à 3blue1brown.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Il est toutefois important de préciser que ces vidéos ne partent pas de zéro, il est nécessaire que vous ayez des connaissances en algèbre linéaire, en régression linéaire et en calcul différentiel et intégral. Je sais que cela peut être un peu décourageant pour ceux qui viennent de milieux non techniques, mais ce n'est pas aussi difficile qu'il y paraît.</font></font></p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="./Petit guide pratique avec ressources pour peaufiner un LLM _ Coffee bytes_files/aircAruvnKk.html" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen="" title="Vidéo YouTube"></iframe>
+</div>
+
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Si vous ne parlez qu'anglais, vous ne connaissez probablement pas DotCSV, mais ce que vous ne savez peut-être pas, c'est que DotCSV propose une introduction aux réseaux neuronaux et que leurs vidéos sont excellentes. Le problème, c'est que ses vidéos sont en espagnol. Cherchez votre application Duolinguo.</font></font></p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="./Petit guide pratique avec ressources pour peaufiner un LLM _ Coffee bytes_files/MRIv2IwFTPg.html" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen="" title="Vidéo YouTube"></iframe>
+</div>
+
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Mais si vous connaissez déjà les réseaux neuronaux, commençons par le concept de réglage fin.</font></font></p>
+<h2 id="what-is-fine-tuning"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Qu'est-ce que le réglage fin ?</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Le réglage fin consiste à sélectionner un modèle déjà formé et à poursuivre son apprentissage sur un ensemble de données particulier du domaine. Comme par exemple un LLM qui a été formé spécifiquement sur des articles scientifiques concernant le diabète.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Parce que, pourquoi utiliser une ingénierie rapide quand vous pouvez peaufiner un modèle et obtenir les mêmes résultats ?</font></font></p>
+<p><a href="./Petit guide pratique avec ressources pour peaufiner un LLM _ Coffee bytes_files/9kjbo2.jpg" aria-label="Le mème de la hotline Drake est en hausse : l&#39;ingénierie rapide est en baisse : les réglages sont précis" class="lightbox-image hoverZoomLink" title="9kjbo2">
+
+</a></p><figure><a href="./Petit guide pratique avec ressources pour peaufiner un LLM _ Coffee bytes_files/9kjbo2.jpg" aria-label="Le mème de la hotline Drake est en hausse : l&#39;ingénierie rapide est en baisse : les réglages sont précis" class="lightbox-image" title="9kjbo2">
+    <img class="md-image" loading="lazy" src="./Petit guide pratique avec ressources pour peaufiner un LLM _ Coffee bytes_files/9kjbo2.jpg" alt="Le mème de la hotline Drake est en hausse : l&#39;ingénierie rapide est en baisse : les réglages sont précis">
+    <figcaption><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Je plaisante, essayez toujours d'abord l'ingénierie rapide</font></font></figcaption>
+</a></figure><a href="./Petit guide pratique avec ressources pour peaufiner un LLM _ Coffee bytes_files/9kjbo2.jpg" aria-label="Le mème de la hotline Drake est en hausse : l&#39;ingénierie rapide est en baisse : les réglages sont précis" class="lightbox-image hoverZoomLink" title="9kjbo2">
+
+</a><p></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">La plupart des modèles LLM actuels affichent des performances globales plutôt positives, mais ne parviennent pas à résoudre des problèmes particuliers axés sur des tâches spécifiques. La procédure de réglage fin offre des avantages significatifs, tels que la réduction des coûts de calcul et la possibilité d'utiliser des modèles avancés sans avoir à en créer un de toutes pièces. 
+
+ </font></font><a class="markdown-link" href="https://coffeebytes.dev/en/devin-ai-the-supposed-replacement-for-programmers/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elle ne remplacera peut-être pas les programmeurs</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+ , mais le réglage fin peut transformer un modèle en outil de prédiction ultime dans un domaine de connaissances.</font></font></p>
+<h3 id="steps-needed-to-fine-tune-an-llm"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Étapes nécessaires pour peaufiner un LLM</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Les étapes peuvent varier selon le modèle, mais généralement le processus ressemble à ceci&nbsp;:</font></font></p>
+<ol>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Charger un ensemble de données&nbsp;: rassemblez votre ensemble de données, existant ou original.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Prétraitement des données&nbsp;: tokenisez votre ensemble de données à l'aide du tokenizer de modèle et divisez-le en ensembles d'entraînement, de validation et de test.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sélection du modèle : Choisissez un LLM pré-entraîné.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Configuration des paramètres : Configurer les hyperparamètres.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Formation ou réglage fin&nbsp;: entraînez le modèle sur l'ensemble de données personnalisé.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Évaluation : Testez-le avec l'ensemble de test.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Inférence&nbsp;: déployez le modèle affiné pour l’inférence sur de nouvelles données, en vous assurant qu’il se généralise bien aux entrées invisibles.</font></font></li>
+</ol>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Voici quelques ressources sur le réglage fin&nbsp;:</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">J'ai adoré cette ressource pour comprendre les 
+
+ </font></font><a class="markdown-link" href="https://www.datacamp.com/tutorial/fine-tuning-large-language-models" rel="noopener" target="_blank"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">étapes générales pour peaufiner un LLM</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Le 
+
+ </font></font><a class="markdown-link" href="https://www.kaggle.com/code/eduardomzepeda/fine-tuning-mistral-7b-with-linkedin-job-posting" rel="noopener nofollow" target="_blank"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">carnet que j'ai utilisé pour peaufiner</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+ le modèle est ici et vous pouvez le consulter.</font></font></p>
+<h2 id="where-to-get-datasets-for-fine-tuning-an-llm"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Où obtenir des ensembles de données pour peaufiner un LLM ?</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">De la même manière que vous avez besoin de données pour entraîner un modèle d’IA, son réglage précis nécessite que vous lui fournissiez les meilleures données que vous puissiez trouver, la meilleure source étant vos propres données.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">J'ai utilisé des ensembles de données de 
+
+ </font></font><a class="markdown-link" href="https://huggingface.co/datasets/" rel="noopener nofollow" target="_blank"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HuggingFace</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+, mais il est important de </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">considérer que les modèles pré-entraînés qui sont disponibles gratuitement ont probablement été formés à l'aide des mêmes données, donc si vous décidez de les utiliser, ne vous attendez pas à une amélioration substantielle par rapport aux performances normales du modèle</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , il serait préférable d'utiliser vos propres données ou votre contenu original.</font></font></p>
+<ul>
+<li>
+
+<a class="markdown-link" href="https://github.com/awesomedata/awesome-public-datasets" rel="noopener nofollow" target="_blank"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Des ensembles de données publiques impressionnants</font></font></a>
+</li>
+<li>
+
+<a class="markdown-link" href="https://kaggle.com/" rel="noopener nofollow" target="_blank"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kaggle</font></font></a>
+</li>
+<li>
+
+<a class="markdown-link" href="https://opendatainception.io/" rel="noopener nofollow" target="_blank"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Création de données ouvertes</font></font></a>
+</li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Assurez-vous que votre ensemble de données est dans un format approprié. Par exemple, j'ai dû en convertir un en utilisant Python en JSONL, car chaque ligne était un fichier séparé, ce qui rendait l'importation incroyablement lente.</font></font></p>
+<h2 id="which-models-are-best-for-fine-tuning-an-llm"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Quels modèles sont les plus adaptés pour peaufiner un LLM ?</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Pour effectuer un réglage fin, un bon point de départ est d'utiliser un LLM pré-entraîné, plus il y a de paramètres, meilleurs seront les résultats, mais ses performances seront moins bonnes.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">En règle générale, c'est une bonne idée de parcourir HuggingFace et de rechercher de grands modèles, parmi les plus populaires que j'ai pu trouver figurent Llama, DeepSeek, Mistral, Falcon, entre autres.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">J'ai testé les modèles suivants car ils étaient très légers et ne nécessitaient pas autant de puissance de calcul, mais vous pouvez utiliser leurs versions plus grandes avec plus de paramètres :</font></font></p>
+<ul>
+<li>
+
+<a class="markdown-link" href="https://huggingface.co/meta-llama/Llama-3.1-8B" rel="noopener nofollow" target="_blank"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Lama-3.1B</font></font></a>
+</li>
+<li>
+
+<a class="markdown-link" href="https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B" rel="noopener nofollow" target="_blank"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">DeepSeek-R1-Distill-Qwen-1,5B</font></font></a>
+</li>
+<li>
+
+<a class="markdown-link" href="https://huggingface.co/mistralai/Mistral-7B-v0.3" rel="noopener nofollow" target="_blank"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Mistral-7B-v0.x</font></font></a>
+</li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">J'ai obtenu de meilleurs résultats avec les LLM Mistral, probablement parce que ceux de DeepSeek ont ​​été formés à l'aide de sources chinoises.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">En fait, j'ai pu l'entraîner et le déployer, mais le modèle renvoyait des caractères chinois, tout comme 
+
+ </font></font><a class="markdown-link" href="https://coffeebytes.dev/en/chat-gpt-searles-chinese-room-and-consciousness/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">la chambre de Searle</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+, de temps en temps dans le cadre de la réponse, même si c'était incroyablement rapide.</font></font></p>
+<h2 id="where-to-fine-tune-an-llm-for-free"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Où peaufiner un LLM gratuitement ?</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Il serait préférable d'avoir vos propres GPU, mais si vous ne le pouvez pas, Google, via 
+
+ </font></font><a class="markdown-link" href="https://colab.research.google.com/" rel="noopener nofollow" target="_blank"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Google Colab,</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+ propose des GPU gratuitement pendant un nombre limité d'heures par jour. 
+
+ </font></font><a class="markdown-link" href="https://www.kaggle.com/" rel="noopener nofollow" target="_blank"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kaggle</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> vous propose 
+ également </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">30 heures d'utilisation du GPU par semaine</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> pour exécuter vos expériences.</font></font><del><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Et créez vos images furry en utilisant les modèles interdits.</font></font></del></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Dans mon aventure de réglage fin, j'ai également trouvé une entreprise appelée 
+
+ </font></font><a class="markdown-link" href="https://salad.com/" rel="noopener nofollow" target="_blank"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">salad</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+, qui sert d'intermédiaire entre les utilisateurs et les joueurs qui souhaitent louer leurs GPU, les prix sont incroyablement compétitifs. 
+
+ </font></font><a class="markdown-link" href="https://vast.ai/" rel="noopener nofollow" target="_blank"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">VastAI</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+ est également une autre option. 
+
+ </font></font><a class="markdown-link" href="https://m.do.co/c/a22240ebb8e7" rel="noopener nofollow" target="_blank"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Digital Ocean</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+ propose également des prix très compétitifs et propose une grande variété de GPU.</font></font></p>
+<h2 id="llm-fine-tuning-tutorials"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tutoriels de perfectionnement du LLM</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Pour le Fine-Tuning, j'ai trouvé ces vidéos assez agréables et directes, cependant je n'ai pas pu produire un modèle fonctionnel, il est possible que les cahiers soient obsolètes et probablement mon inexpérience a rendu impossible l'obtention.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">C'est une bonne introduction mais ne partage pas le notebook, même si j'ai pu le trouver sur Google Colab, j'ai mis le lien dans la section suivante.</font></font></p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="./Petit guide pratique avec ressources pour peaufiner un LLM _ Coffee bytes_files/pxhkDaKzBaY.html" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen="" title="Vidéo YouTube"></iframe>
+</div>
+
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Il est un peu plus précis et va droit au but.</font></font></p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="./Petit guide pratique avec ressources pour peaufiner un LLM _ Coffee bytes_files/Q9zv369Ggfk.html" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen="" title="Vidéo YouTube"></iframe>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <aside class="affiliate-link-container">
+      <div class="affiliate-heading">
+        <h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Par où commencer avec l'apprentissage automatique et l'IA</font></font></h2>
+        <span class="affiliate-badge"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Annonce</font></font></span>
+      </div>
+      <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Je vous recommande ce petit livre d'une centaine de pages sur le Machine Learning, il traite des bases du Machine Learning et de toutes les mathématiques nécessaires pour comprendre comment les modèles d'IA sont formés. Ne vous laissez pas tromper par sa taille, il est dense, ce n'est certainement pas une promenade de santé. Le livre est si court parce qu'il laisse de côté tout le remplissage et ne garde que les parties cruciales du Machine Learning. Attention : il contient beaucoup d'équations et il ne fait pas exactement une centaine de pages mais un peu plus.</font></font></p>
+      
+      <a rel="nofollow sponsored" id="artificial intelligence" class="affiliate-link" href="https://amzn.to/3D3oMvN"><img loading="lazy" class="affiliate-img" src="./Petit guide pratique avec ressources pour peaufiner un LLM _ Coffee bytes_files/hundred-page-machine-learning-book_ueonkh.jpg" alt="Couverture du livre de cent pages sur l&#39;apprentissage automatique" title="Couverture du livre de cent pages sur l&#39;apprentissage automatique"></a>
+      
+      <p><a rel="nofollow sponsored" id="artificial intelligence" class="affiliate-link markdown-link" href="https://amzn.to/3D3oMvN"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Vérifiez le prix du livre Machine Learning de cent pages et achetez-le sur Amazon</font></font></a></p>
+    </aside>
+  
+
+  
+  
+    <aside class="affiliate-link-container">
+      <div class="affiliate-heading">
+        <h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Comment concevoir un bon logiciel ?</font></font></h2>
+        <span class="affiliate-badge"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Annonce</font></font></span>
+      </div>
+      <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Oubliez Clean Code et lisez plutôt ce livre. Pourquoi ? Écrire un bon logiciel est difficile car la définition d'un bon logiciel est très variable, ce livre traite de cette question en profondeur. Tout au long du livre, vous en apprendrez davantage sur la complexité et son flux, les abstractions, la dissimulation d'informations et les « métas » de la programmation. À mon avis, une philosophie de conception de logiciel va au-delà de ce que Clean Code a à offrir, désolé tonton Bob.</font></font></p>
+      
+      <a rel="nofollow sponsored" id="opinions" class="affiliate-link" href="https://amzn.to/4i8kodH"><img loading="lazy" class="affiliate-img" src="./Petit guide pratique avec ressources pour peaufiner un LLM _ Coffee bytes_files/a-philosophy-of-software-design.jpg" alt="Couverture du livre Une philosophie de la conception de logiciels" title="Couverture du livre Une philosophie de la conception de logiciels"></a>
+      
+      <p><a rel="nofollow sponsored" id="opinions" class="affiliate-link markdown-link" href="https://amzn.to/4i8kodH"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Vérifiez le prix de Une philosophie de la conception de logiciels et achetez-le sur Amazon</font></font></a></p>
+    </aside>
+  
+
+
+
+<style>
+  .affiliate-heading {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .affiliate-badge{
+    opacity: 0.7;
+    font-size: 0.95rem;
+    word-break: keep-all;
+  }
+  .affiliate-img {
+    max-height: 450px;
+    width: 100%;
+   }
+</style>
+
+<script>
+  async function updateLinkToMx(){
+    
+
+    const response = await fetch("/data/ads.json")
+    const adsData = await response.json()
+    const affiliateLinks = document.querySelectorAll(".affiliate-link")
+    affiliateLinks?.forEach((link)=>{
+      
+      
+      let category = link?.getAttribute("id")
+      link.setAttribute("href", adsData["es-MX"][category]["link"])
+    })
+  }
+  
+  
+  
+  if(Intl.DateTimeFormat().resolvedOptions().timeZone==="America/Mexico_City" && "en"==="es"){
+    try {
+      updateLinkToMx()
+    } catch(e){
+      console.error("Error trying to update mx affiliate links: ", e)
+    }
+  }
+</script>
+
+<h2 id="notebooks-for-llm-fine-tuning"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cahiers pour peaufiner le LLM.</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">C'est 
+
+ </font></font><a class="markdown-link" href="https://github.com/brevdev/notebooks/blob/main/mistral-finetune-own-data.ipynb" rel="noopener nofollow" target="_blank"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ce carnet qui m'a permis de peaufiner le modèle Mistral</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+, avec quelques modifications bien sûr.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">La plupart des notebooks nécessitent simplement que vous changiez le modèle et adaptiez l'ensemble de données à l'entrée du modèle, afin que vous puissiez les utiliser comme point de départ pour votre cas particulier.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">D’autres que j’ai trouvés particulièrement utiles mais qui n’ont pas fonctionné pour moi ou ont produit des résultats indésirables.</font></font></p>
+<ul>
+<li>
+
+<a class="markdown-link" href="https://www.kaggle.com/code/kingabzpro/fine-tuning-deepseek-r1-reasoning-model" rel="noopener nofollow" target="_blank"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Réglages précis de DeepSeek R1</font></font></a>
+</li>
+<li>
+
+<a class="markdown-link" href="https://colab.research.google.com/drive/135ced7oHytdxu3N2DNe1Z0kqjyYIkDXp" rel="noopener nofollow" target="_blank"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Alpaga + Flame - Mise au point</font></font></a>
+</li>
+</ul>
+<h2 id="where-to-deploy-an-llm-model"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Où déployer un modèle LLM ?</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Après avoir créé votre modèle, vous souhaiterez peut-être le rendre disponible à d'autres.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">En général, il existe des outils comme Gradio qui font abstraction du processus de génération d'un serveur de chat comme OpenAI, vous pouvez les configurer vous-même ou utiliser ceux disponibles sur HuggingFace, bien que, évidemment, pour un coût mensuel, les plans gratuits n'ont que du CPU et de la RAM, donc ce n'est généralement pas suffisant pour exécuter votre LLM, surtout les plus gros.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Comme mon projet était à des fins éducatives et que je ne voulais pas payer pour un forfait premium, j'ai décidé de mettre le code nécessaire pour exécuter mon modèle dans un 
+
+ </font></font><a class="markdown-link" href="https://colab.research.google.com/drive/1Fe348rmXbDyvjoDPGEKrBtPurpfwnFgG" rel="noopener nofollow" target="_blank"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">notebook GoogleColab avec le code nécessaire pour l'exécuter.</font></font></a>
+</p>
+</div>
+        </article>
+        <div class="next-previous-links">
+            <section aria-label="Liens suivants et précédents" class="next-prev-links">
+    
+    
+        <div class="next-link">
+            <p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">←Suivant</font></font></strong></p>
+            <a title="Le moyen le plus simple d&#39;utiliser HTTPS dans Localhost" aria-label="Article suivant" class="next-prev" rel="next" href="https://coffeebytes.dev/en/the-easiest-way-to-use-https-in-localhost/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Le moyen le plus simple d'utiliser HTTPS dans Localhost</font></font></a>
+        </div>
+    
+    
+        <div class="previous-link">
+            <p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Précédent→</font></font></strong></p>
+            <a title="Architecture multi-locataire dans les logiciels : qu&#39;est-ce que c&#39;est et quels sont ses modèles de bases de données ?" aria-label="Article précédent" class="next-prev" rel="prev" href="https://coffeebytes.dev/en/multi-tenant-architecture-in-software-what-is-it-and-its-databases-patterns/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Architecture multi-locataire dans les logiciels : qu'est-ce que c'est...</font></font></a>
+        </div>
+    
+</section>
+            
+
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Articles connexes</font></font></h3>
+<section aria-label="" class="related-content-container">
+    <ul class="related-content">
+        
+        
+        <li class="related-content-item">
+            <a class="related-content-link" aria-label="Google Notebooklm va remodeler à jamais le scénario du podcast" title="Google Notebooklm va remodeler à jamais le scénario du podcast" href="https://coffeebytes.dev/en/google-notebooklm-will-reshape-the-podcast-scenario-forever/">
+                
+                
+                
+                
+
+
+
+
+<picture>
+    <source srcset="/en/google-notebooklm-will-reshape-the-podcast-scenario-forever/images/Google-Notebooklm-Will-Transform-Podcasts-For-Good_hua2fbca059aa154b7024371e96172f184_97143_420x0_resize_q90_box.jpg" width="420" height="221" media="(max-width: 480px)">
+    <source srcset="/en/google-notebooklm-will-reshape-the-podcast-scenario-forever/images/Google-Notebooklm-Will-Transform-Podcasts-For-Good_hua2fbca059aa154b7024371e96172f184_97143_480x0_resize_q90_box.jpg" width="480" height="252" media="(max-width: 768px)">
+    <source srcset="/en/google-notebooklm-will-reshape-the-podcast-scenario-forever/images/Google-Notebooklm-Will-Transform-Podcasts-For-Good_hua2fbca059aa154b7024371e96172f184_97143_768x0_resize_q90_box.jpg" width="768" height="403" media="(max-width: 1200px)">
+    <img class="responsive-image" loading="lazy" width="1200" height="630" src="./Petit guide pratique avec ressources pour peaufiner un LLM _ Coffee bytes_files/Google-Notebooklm-Will-Transform-Podcasts-For-Good_hua2fbca059aa154b7024371e96172f184_97143_768x0_resize_q90_box.jpg" alt="">
+</picture><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                
+                Google Notebooklm va remodeler à jamais le scénario du podcast
+            </font></font></a>
+        </li>
+        
+        
+        <li class="related-content-item">
+            <a class="related-content-link" aria-label="La montée et la chute de la bulle de l’IA" title="La montée et la chute de la bulle de l’IA" href="https://coffeebytes.dev/en/the-rise-and-fall-of-the-ai-bubble/">
+                
+                
+                
+                
+
+
+
+
+<picture>
+    <source srcset="/en/the-rise-and-fall-of-the-ai-bubble/images/ai-rise-and-fall-bubble_hu7849b20ce9ad2599a2189d7278ab15e2_239438_420x0_resize_q90_box.jpg" width="420" height="221" media="(max-width: 480px)">
+    <source srcset="/en/the-rise-and-fall-of-the-ai-bubble/images/ai-rise-and-fall-bubble_hu7849b20ce9ad2599a2189d7278ab15e2_239438_480x0_resize_q90_box.jpg" width="480" height="252" media="(max-width: 768px)">
+    <source srcset="/en/the-rise-and-fall-of-the-ai-bubble/images/ai-rise-and-fall-bubble_hu7849b20ce9ad2599a2189d7278ab15e2_239438_768x0_resize_q90_box.jpg" width="768" height="403" media="(max-width: 1200px)">
+    <img class="responsive-image" loading="lazy" width="1200" height="630" src="./Petit guide pratique avec ressources pour peaufiner un LLM _ Coffee bytes_files/ai-rise-and-fall-bubble_hu7849b20ce9ad2599a2189d7278ab15e2_239438_768x0_resize_q90_box.jpg" alt="">
+</picture><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                
+                La montée et la chute de la bulle de l’IA
+            </font></font></a>
+        </li>
+        
+        
+        <li class="related-content-item">
+            <a class="related-content-link" aria-label="Devin AI Cette IA remplacera-t-elle les programmeurs ?" title="Devin AI Cette IA remplacera-t-elle les programmeurs ?" href="https://coffeebytes.dev/en/devin-ai-the-supposed-replacement-for-programmers/">
+                
+                
+                
+                
+
+
+
+
+<picture>
+    <source srcset="/en/devin-ai-the-supposed-replacement-for-programmers/images/devin-cognitive-artificial-intelligence-and-programmers_hue7288a19409a95361f9393c86220eef5_73498_420x0_resize_q90_box.jpg" width="420" height="221" media="(max-width: 480px)">
+    <source srcset="/en/devin-ai-the-supposed-replacement-for-programmers/images/devin-cognitive-artificial-intelligence-and-programmers_hue7288a19409a95361f9393c86220eef5_73498_480x0_resize_q90_box.jpg" width="480" height="252" media="(max-width: 768px)">
+    <source srcset="/en/devin-ai-the-supposed-replacement-for-programmers/images/devin-cognitive-artificial-intelligence-and-programmers_hue7288a19409a95361f9393c86220eef5_73498_768x0_resize_q90_box.jpg" width="768" height="404" media="(max-width: 1200px)">
+    <img class="responsive-image" loading="lazy" width="1200" height="631" src="./Petit guide pratique avec ressources pour peaufiner un LLM _ Coffee bytes_files/devin-cognitive-artificial-intelligence-and-programmers_hue7288a19409a95361f9393c86220eef5_73498_768x0_resize_q90_box.jpg" alt="">
+</picture><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                
+                Devin AI Cette IA remplacera-t-elle les programmeurs ?
+            </font></font></a>
+        </li>
+        
+        
+        <li class="related-content-item">
+            <a class="related-content-link" aria-label="Chat Gpt, la salle chinoise de Searle et la conscience" title="Chat Gpt, la salle chinoise de Searle et la conscience" href="https://coffeebytes.dev/en/chat-gpt-searles-chinese-room-and-consciousness/">
+                
+                
+                
+                
+
+
+
+
+<picture>
+    <source srcset="/en/chat-gpt-searles-chinese-room-and-consciousness/images/chat-gpt-y-la-habitacion-china_hude4f61c05bc606e0243a9197d6469063_70076_420x0_resize_q90_box.jpg" width="420" height="221" media="(max-width: 480px)">
+    <source srcset="/en/chat-gpt-searles-chinese-room-and-consciousness/images/chat-gpt-y-la-habitacion-china_hude4f61c05bc606e0243a9197d6469063_70076_480x0_resize_q90_box.jpg" width="480" height="252" media="(max-width: 768px)">
+    <source srcset="/en/chat-gpt-searles-chinese-room-and-consciousness/images/chat-gpt-y-la-habitacion-china_hude4f61c05bc606e0243a9197d6469063_70076_768x0_resize_q90_box.jpg" width="768" height="403" media="(max-width: 1200px)">
+    <img class="responsive-image" loading="lazy" width="1200" height="630" src="./Petit guide pratique avec ressources pour peaufiner un LLM _ Coffee bytes_files/chat-gpt-y-la-habitacion-china_hude4f61c05bc606e0243a9197d6469063_70076_768x0_resize_q90_box.jpg" alt="">
+</picture><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                
+                Chat Gpt, la salle chinoise de Searle et la conscience
+            </font></font></a>
+        </li>
+        
+        
+        <li class="related-content-item">
+            <a class="related-content-link" aria-label="Je teste ChatGPT avec les défis de codage de Codewars" title="Je teste ChatGPT avec les défis de codage de Codewars" href="https://coffeebytes.dev/en/i-test-chatgpt-with-codewars-coding-challenges/">
+                
+                
+                
+                
+
+
+
+
+<picture>
+    <source srcset="/en/i-test-chatgpt-with-codewars-coding-challenges/images/gpt3-vs-codewars_hua9ae43e8195fe01b67adbd9bb8be3e43_141385_420x0_resize_q90_box.jpg" width="420" height="221" media="(max-width: 480px)">
+    <source srcset="/en/i-test-chatgpt-with-codewars-coding-challenges/images/gpt3-vs-codewars_hua9ae43e8195fe01b67adbd9bb8be3e43_141385_480x0_resize_q90_box.jpg" width="480" height="252" media="(max-width: 768px)">
+    <source srcset="/en/i-test-chatgpt-with-codewars-coding-challenges/images/gpt3-vs-codewars_hua9ae43e8195fe01b67adbd9bb8be3e43_141385_768x0_resize_q90_box.jpg" width="768" height="403" media="(max-width: 1200px)">
+    <img class="responsive-image" loading="lazy" width="1200" height="630" src="./Petit guide pratique avec ressources pour peaufiner un LLM _ Coffee bytes_files/gpt3-vs-codewars_hua9ae43e8195fe01b67adbd9bb8be3e43_141385_768x0_resize_q90_box.jpg" alt="">
+</picture><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                
+                Je teste ChatGPT avec les défis de codage de Codewars
+            </font></font></a>
+        </li>
+        
+        
+        <li class="related-content-item">
+            <a class="related-content-link" aria-label="OCR avec tesseract, python et pytesseract" title="OCR avec tesseract, python et pytesseract" href="https://coffeebytes.dev/en/ocr-with-tesseract-python-and-pytesseract/">
+                
+                
+                
+                
+
+
+
+
+<picture>
+    <source srcset="/en/ocr-with-tesseract-python-and-pytesseract/images/OCR_hu5ad8fc2912eca55d73b2ba44599c8cbf_133982_420x0_resize_q90_box.jpg" width="420" height="221" media="(max-width: 480px)">
+    <source srcset="/en/ocr-with-tesseract-python-and-pytesseract/images/OCR_hu5ad8fc2912eca55d73b2ba44599c8cbf_133982_480x0_resize_q90_box.jpg" width="480" height="252" media="(max-width: 768px)">
+    <source srcset="/en/ocr-with-tesseract-python-and-pytesseract/images/OCR_hu5ad8fc2912eca55d73b2ba44599c8cbf_133982_768x0_resize_q90_box.jpg" width="768" height="403" media="(max-width: 1200px)">
+    <img class="responsive-image" loading="lazy" width="1200" height="630" src="./Petit guide pratique avec ressources pour peaufiner un LLM _ Coffee bytes_files/OCR_hu5ad8fc2912eca55d73b2ba44599c8cbf_133982_768x0_resize_q90_box.jpg" alt="">
+</picture><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                
+                OCR avec tesseract, python et pytesseract
+            </font></font></a>
+        </li>
+        
+    </ul>
+</section>
+
+        </div>
+    </div>
+</div>
+
+<section class="author-info">
+    <div class="author-container">
+        
+        
+        
+        <figure>
+            <img class="author-picture" loading="lazy" src="./Petit guide pratique avec ressources pour peaufiner un LLM _ Coffee bytes_files/web-dev-profile-picture_ypb9hn_5401352588103867584_huba1e0bbecf35de9b7bd23aa3f223d4b7_0_120x0_resize_q75_box.jpg" width="120" height="120" alt="Eduardo Zepeda">
+            <figcaption>
+            </figcaption>
+        </figure>
+        <a rel="author" class="author-name" aria-label="Page de l&#39;auteur Eduardo Zepeda" href="https://coffeebytes.dev/en/authors/eduardo-zepeda/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            Eduardo Zepeda
+        </font></font></a>
+        <div class="author-summary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Développeur Web et passionné de GNU/Linux. Je crois qu'il faut choisir le bon outil pour le travail et que la simplicité est la sophistication ultime. Mieux vaut faire que d'être parfait. Je crois également à la bonté des crypto-monnaies en dehors de la spéculation monétaire.</font></font></div>
+        <a class="author-read-more" href="https://coffeebytes.dev/en/authors/eduardo-zepeda/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">En savoir plus</font></font></a>
+        
+        
+        
+    </div>
+</section>
+
+
+            
+        </div>
+    </main><footer id="footer">
+    <section aria-label="Liens de pied de page" class="footer-links">
+    <a class="footer-link " href="https://coffeebytes.dev/en/pages/politica-de-privacidad/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        
+        Politique de confidentialité
+    </font></font></a>
+    
+    <a class="footer-link " href="https://coffeebytes.dev/en/pages/politica-de-cookies/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        
+        Politique de cookies
+    </font></font></a>
+    
+    <a class="footer-link " href="https://coffeebytes.dev/en/pages/disclosure/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        
+        Divulgation
+    </font></font></a>
+    
+</section>
+    <div class="credits">
+    <section aria-label="Liens vers les réseaux sociaux" class="social-links">
+    <a class="social-link " href="https://www.codewars.com/users/EduardoZepeda" aria-label="Lien de Codewars">
+        
+        <svg class="social-icon codewars-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="m195.79 36.703c-8.448 0.0076-15.945 5.4144-18.619 13.428-12.698-12.94-34.725-5.4192-36.859 12.584-3.1788-1.5928-6.6743-2.4527-10.229-2.5165-13.153-0.40594-24.113 10.068-24.52 23.302-0.0489 2.7882 0.39119 5.5633 1.3002 8.1999-15.653-1.428-29.592 9.8812-31.42 25.493-0.37313 3.2829-0.18059 6.6055 0.56926 9.823-3.7347 0.6495-7.227 2.8409-9.4188 6.2508-1.1714 1.836-1.8944 3.9219-2.1106 6.0891-12.252-5.2109-25.482 5.005-23.54 18.177 0.02541 3e-3 0.05075 7e-3 0.07607 9e-3l0.08245 0.89273c-0.06097-0.29928-0.1138-0.60013-0.15857-0.90226-17.742-2.2194-28.985 18.489-17.46 32.159-17.702 4.218-22.571 27.098-8.1187 38.158-3.0383 1.8657-5.6184 4.3905-7.5495 7.3879-7.0952 11.145-3.826 25.93 7.3068 33.044 2.3401 1.491 4.9221 2.5626 7.6306 3.1666-9.3113 12.694-6.7883 30.499 5.6831 40.106 3.1957 2.4696 6.8748 4.2399 10.799 5.1963l-0.4059-0.0809c-2.2997 4.0902-2.3915 9.0618-0.2442 13.234 1.0058 1.9326 2.4524 3.6013 4.2227 4.8712-10.651 7.9524-8.5095 24.492 3.8152 29.47-10.959 14.22 1.322 34.478 18.998 31.338-5.2235 17.308 11.862 32.989 28.66 26.305 0.114 3.5675 1.0294 7.0634 2.6783 10.229 6.0307 11.721 20.399 16.366 32.15 10.392 2.4978-1.2736 4.7517-2.9773 6.6583-5.033 6.2535 14.37 22.797 21.167 37.346 15.343 5.6594-2.2444 10.463-6.2234 13.721-11.366l-0.0825 0.16333c0.6495 6.9012 6.4151 12.422 13.478 12.584 2.1899 0.0456 4.3596-0.4277 6.3316-1.3811 1.9165 13.126 17.429 19.132 27.684 10.717 3.259 7.4352 10.755 12.1 18.865 11.74 8.1099-0.35963 15.164-5.67 17.752-13.364 12.725 12.95 34.78 5.3717 36.858-12.665 3.1737 1.6184 6.6695 2.5059 10.231 2.5973 13.197 0.31767 24.164-10.104 24.518-23.3 0.0837-2.7807-0.31929-5.5546-1.1909-8.1965-0.28001-0.0245-0.55965-0.053-0.83885-0.0856h0.81188c9e-3 0.0285 0.0181 0.0571 0.027 0.0856 15.614 1.3652 29.485-9.9292 31.311-25.496 0.4097-3.3054 0.245-6.6566-0.48681-9.9055 3.6535-0.56831 7.1445-2.7597 9.3363-6.2508 1.1714-1.836 1.8944-3.9219 2.1106-6.0891 12.594 5.3401 26.031-5.5784 23.383-18.998 0.0615 0.29614 0.11546 0.59382 0.16174 0.89272 17.816 2.2866 29.105-18.559 17.455-32.231 5.196-1.299 10.068-4.5462 13.153-9.4174 5.9936-9.3998 3.8474-21.817-4.9537-28.66 3.0183-1.8982 5.5714-4.4507 7.4704-7.4684 7.0404-11.128 3.7764-25.853-7.3068-32.963-2.335-1.5196-4.918-2.6187-7.632-3.2475 9.2761-12.658 6.7923-30.399-5.6022-40.024-3.1063-2.4007-6.6704-4.1414-10.473-5.1154 2.3288-4.1112 2.4207-9.1213 0.2442-13.315-0.98231-1.9237-2.4-3.5917-4.1402-4.8712 10.651-7.9524 8.5081-24.493-3.8167-29.47 10.816-14.211-1.4015-34.314-18.996-31.257 5.368-17.393-11.869-33.217-28.74-26.386-0.0894-3.5614-0.97757-7.0573-2.599-10.229-6.0321-11.768-20.461-16.421-32.231-10.392-2.5037 1.2985-4.7574 3.0304-6.6568 5.1154-6.1702-14.451-22.732-21.352-37.346-15.426-5.5789 2.2232-10.321 6.1382-13.561 11.195 2.8e-4 0.0024 1e-3 0.0049 1e-3 0.0081l-0.16174 0.2442c0.0529-0.08432 0.10634-0.16836 0.16016-0.25213-0.73433-6.816-6.4144-12.333-13.556-12.495-2.184-0.07104-4.3539 0.37447-6.3333 1.3003-1.9159-13.126-17.429-19.131-27.684-10.718-3.143-7.131-10.203-11.73-17.996-11.723zm14.098 33.319c2.9535 5.1868 8.4047 8.4513 14.371 8.6068 3.5155 0.09696 6.9748-0.89557 9.9042-2.8416 0.49804 1.6475 1.2964 3.1889 2.3548 4.5462-0.4383 0.17659-0.87136 0.36589-1.2987 0.56768-8.4818 4.3866-13.575 13.365-12.99 22.896-4.1553-0.34311-8.3229 0.50155-12.016 2.4356-10.827 5.6245-15.073 18.942-9.4986 29.795v0.0809c-12.843 2.7179-19.578 16.912-13.559 28.579 1.1047 2.1446 2.5904 4.0703 4.3844 5.6831 0.42084-0.20668 0.8504-0.39502 1.2876-0.56451-8.7867 3.5111-12.655 13.814-8.3499 22.241 1.6836 3.2569 4.435 5.8365 7.7936 7.3068-7.9984 8.0572-4.0095 21.767 7.0627 24.275-1.4257 2.6557-1.456 5.8424-0.0809 8.5244 0.62452 1.2097 1.5127 2.2636 2.599 3.0842-3.359 3.9169-5.6275 8.6494-6.5774 13.721-2.652-1.2288-5.733-1.1078-8.2803 0.32506-1.5426-6.2514-6.9823-10.96-13.721-11.122-2.9446-0.0558-5.8352 0.79443-8.2803 2.4356-1.6238-6.9823-7.7949-12.26-15.264-12.422-1.1418-0.04-2.2847 0.0419-3.4092 0.2442 0.15615-0.99414 0.23725-1.9986 0.24261-3.0049 0.30922-10.425-7.4859-19.318-17.861-20.378 0.92538-2.3304 1.4472-4.8013 1.5429-7.3068 0.16238-8.5244-4.3841-15.994-11.366-19.891 3.1422-4.0513 4.9063-9.0016 5.0346-14.127 0.16237-6.7386-2.3554-12.827-6.6583-17.292 8.6934-4.3766 14.61-12.824 15.751-22.49 0.65579-5.4777-0.2743-11.028-2.6798-15.993 12.436-0.40927 22.472-10.303 23.057-22.732 2.5 1.0315 5.172 1.5823 7.876 1.6237 9.9596 0.27468 18.814-6.2995 21.432-15.912 3.4786 3.1478 7.9761 4.9349 12.667 5.033 5.4184 0.13733 10.651-1.9791 14.451-5.8449zm99.373 32.881c6.3219 10.724 19.823 14.788 31.015 9.3363 0.25775 2.7188 1.0288 5.3639 2.2723 7.7956 4.5556 8.8651 14.587 13.461 24.275 11.122-1.1118 4.5671-0.53509 9.3823 1.6238 13.558 2.598 5.0336 6.983 8.4446 12.016 9.9055-3.1263 5.0775-3.3729 11.419-0.65013 16.724 1.5998 3.1208 4.1232 5.6724 7.2256 7.3068-0.67733 0.71946-1.2764 1.5088-1.7871 2.3548-1.3573-1.4257-2.884-2.6797-4.5462-3.7343-8.281-5.3584-18.673-4.8725-26.386 0.32348-1.7833-3.7647-4.5986-6.9458-8.1187-9.1734-10.334-6.5739-24.042-3.5195-30.607 6.82-1.1501-1.2735-2.4602-2.3928-3.8977-3.33-9.2937-5.9988-21.696-3.2629-27.604 6.0891-1.318 2.0328-2.2536 4.2893-2.7607 6.6583-7.469-4.79-17.373-2.598-22.083 4.8712-1.9777 3.0827-2.8375 6.7507-2.4356 10.391-11.001-2.7744-20.762 7.6286-17.293 18.431-3.0056 0.11097-5.766 1.6881-7.3879 4.2211-0.59008 0.94607-1.0028 1.9917-1.2178 3.0858-4.8213-1.1206-9.8474-1.0088-14.614 0.32506-0.16238-0.73067-0.40594-1.4623-0.81187-2.193-0.763-1.472-1.914-2.7075-3.3284-3.5725 4.8712-4.303 6.3326-11.365 3.2475-17.292-1.3462-2.6344-3.4726-4.7891-6.0891-6.1699 5.3584-4.7088 7.0634-12.666 3.6535-19.323-0.52042-1.0106-1.1466-1.9631-1.8679-2.8416 0.94952-0.33603 1.8723-0.74312 2.7607-1.2178 9.3363-4.79 13.315-15.914 9.3363-25.412 2.4938-0.34461 4.9103-1.1131 7.1452-2.2723 7.2581-3.737 11.874-11.161 12.015-19.323 5.0857 0.80058 10.294-0.0532 14.858-2.4356 5.7783-2.9748 10.111-8.1559 12.016-14.37v0.24262c7.9984 5.5426 18.244 6.7016 27.279 3.0858 5.1156-2.0425 9.5391-5.5082 12.746-9.9867zm-234.31 51.392c0.71864 0.19281 1.4514 0.32855 2.1914 0.40593-0.91355 2.4995-1.407 5.133-1.4604 7.7936-0.25892 9.5912 5.1929 18.423 13.883 22.49-2.2851 3.4492-3.5514 7.4724-3.6535 11.609-0.32475 12.26 9.4174 22.408 21.596 22.652h0.0809c-3.7516 12.57 5.4781 25.265 18.592 25.574 2.4262 0.087 4.8478-0.27095 7.1452-1.0561-0.24356 8.8495 6.7379 16.238 15.587 16.401 3.6821 0.12798 7.2953-1.0192 10.229-3.2475 3.3568 10.728 17.139 13.685 24.6 5.2771 1.6563 2.5252 4.4494 4.0736 7.4684 4.1402 1.9403 0.0533 3.8468-0.51569 5.4405-1.6237v0.16173c1.6658 4.35 4.3363 8.2445 7.7935 11.366-3.2051 1.4432-5.2913 4.6043-5.3581 8.1187-6.0079-1.9485-12.909 0.2442-16.563 5.9273-1.5553 2.4732-2.3197 5.3617-2.1914 8.2803-6.82-2.192-14.452 0.3257-18.511 6.6583-0.6234 0.96973-1.1406 2.0038-1.5429 3.0842-0.76279-0.68369-1.5771-1.3076-2.4356-1.8664-8.7684-5.6831-20.458-3.4099-26.628 4.8712-1.5653-1.9866-3.4603-3.6896-5.6022-5.0346-6.9005-4.4156-15.674-4.665-22.813-0.64855-1.8613-4.7548-5.1888-8.7934-9.4999-11.529-5.6831-3.6535-12.178-4.6276-18.267-3.2475 0.73656-9.6987-3.4404-19.119-11.122-25.086-4.3303-3.3955-9.5425-5.4804-15.02-6.0082 6.0683-10.883 2.7444-24.602-7.632-31.501 2.1914-1.584 4.0646-3.5669 5.5214-5.8449 5.5207-8.6062 4.1396-19.567-2.599-26.63 4.4949-1.3351 8.3574-4.2464 10.88-8.1998 3.0039-4.79 3.7346-10.31 2.4356-15.426 5.9636 0.14074 11.567-2.8456 14.775-7.8747 1.9055-2.9712 2.8419-6.4606 2.6798-9.9866zm241.86 46.358c1.5584 2.0155 3.4538 3.7462 5.6022 5.1154 6.9154 4.3903 15.688 4.6085 22.813 0.56769 1.8674 4.796 5.2252 8.8658 9.579 11.611 5.6019 3.6534 12.178 4.5468 18.187 3.1666-0.76469 9.727 3.4159 19.186 11.124 25.168h0.0809c4.3624 3.3802 9.6033 5.437 15.1 5.9258-6.1193 10.901-2.7902 24.678 7.632 31.582-2.2204 1.5762-4.1216 3.5596-5.6022 5.8449-5.378 8.427-4.2694 19.443 2.6798 26.63-4.5122 1.2974-8.404 4.1804-10.96 8.1187-2.9176 4.5809-3.7998 10.169-2.4356 15.426-5.9642-0.14129-11.569 2.8451-14.777 7.8747-1.905 2.9714-2.8408 6.4608-2.6782 9.9867l-2.193-0.40594-0.0809 0.16175c0.97811-2.5155 1.527-5.1774 1.6237-7.8747 0.22941-9.6284-5.293-18.47-14.046-22.488 2.2854-3.4496 3.5516-7.4738 3.6534-11.611 0.32475-12.26-9.3363-22.408-21.596-22.732 0.49151-1.6627 0.76441-3.3823 0.81187-5.1154 0.31767-11.049-8.4338-20.238-19.485-20.459-2.4036-0.051-4.7965 0.33426-7.0627 1.1369l-9e-3 0.0967c-0.0294 0.48412-0.0808 0.96669-0.15381 1.4461l0.15381-1.4461c3e-3 -0.0592 7e-3 -0.11839 9e-3 -0.1776 0.16238-8.8495-6.7392-16.238-15.67-16.401-3.6643-0.0862-7.2466 1.0888-10.148 3.3283-3.3253-10.813-17.224-13.785-24.681-5.2772-1.6378-2.5561-4.434-4.1364-7.4684-4.2211-1.4039-0.0198-2.7933 0.28575-4.0594 0.89272-1.2535-4.5757-3.5931-8.7812-6.82-12.259 0.56831-0.48712 1.1366-1.1373 1.6237-1.8679 0.869-1.3897 1.3462-2.9884 1.3811-4.627 6.0891 1.9485 12.989-0.32506 16.561-6.0082 1.6002-2.4868 2.3943-5.4067 2.2739-8.3614 6.9485 2.2715 14.554-0.431 18.511-6.5775 0.59486-0.97331 1.0844-2.0072 1.4604-3.0842 0.76604 0.65529 1.5802 1.2521 2.4356 1.7854 8.8495 5.6831 20.46 3.4099 26.63-4.8712zm-64.301 62.108v0.16332c1.2104 0.61108 2.5421 0.94371 3.8976 0.97365 1.6438 0.0539 3.2714-0.33903 4.7095-1.1369 1.4614 6.2514 6.9809 10.88 13.639 11.124 2.9725 0.0729 5.8944-0.77807 8.3628-2.4356 1.6554 7.1053 7.8889 12.205 15.181 12.42 1.1452 0.0135 2.2887-0.0955 3.4108-0.32507-0.16079 1.0208-0.24243 2.0524-0.2442 3.0858-0.26611 10.394 7.5177 19.239 17.861 20.297-3.905 10.248 0.27127 21.811 9.823 27.198-3.1579 4.0736-4.9224 9.0544-5.0329 14.208-0.16238 6.7386 2.4347 12.828 6.7376 17.293l-0.0809-0.0825c-8.3621 4.3029-14.533 12.504-15.751 22.49-0.6558 5.4777 0.27429 11.028 2.6798 15.993-12.503 0.40593-22.733 10.555-23.057 23.302v-0.48839c-2.4941-1.059-5.1658-1.6373-7.8747-1.7046-9.9535-0.22798-18.773 6.3785-21.353 15.995-3.487-3.1956-8.0173-5.0138-12.746-5.1154-5.419-0.13777-10.653 1.9787-14.452 5.8449-2.9738-5.1546-8.4202-8.3858-14.37-8.5244-3.5248-0.073-6.9857 0.94857-9.9055 2.924v-0.0825c0.0274 1e-3 0.055 1e-3 0.0824 0-0.52256-1.6535-1.3485-3.1952-2.4356-4.5462 9.2491-4.0632 14.985-13.461 14.37-23.544 4.1202 0.35216 8.256-0.46394 11.934-2.3548 10.905-5.5962 15.198-18.982 9.581-29.876v-0.0809c1.6945-0.38134 3.3321-0.98211 4.8712-1.7871 9.8237-4.8712 13.639-16.968 8.6055-26.792-1.0801-2.138-2.5375-4.0632-4.302-5.6831 7.8753-4.0594 11.041-13.72 6.9816-21.596-1.6836-3.2569-4.435-5.8365-7.7935-7.3068 7.899-8.0842 3.8785-21.699-7.1452-24.195 1.4797-2.6636 1.5402-5.8882 0.16174-8.6055-0.92085-1.7816-2.4049-3.2088-4.2211-4.0594 3.7119-3.5699 6.4264-8.0477 7.8747-12.99zm-20.945 20.216c-0.17253 1.7984 0.19457 3.6074 1.0545 5.1963 0.74082 1.4618 1.8629 2.6961 3.2475 3.5725-4.79 4.303-6.2514 11.365-3.2475 17.373 1.346 2.635 3.4724 4.7902 6.0891 6.1715-5.2772 4.7088-7.0634 12.583-3.6534 19.24 0.54033 1.0427 1.1939 2.0228 1.9488 2.9224-0.97487 0.30574-1.9249 0.68586-2.8416 1.1369-9.2552 4.79-13.315 15.914-9.2558 25.412-2.5207 0.33736-4.9645 1.106-7.2243 2.2723-7.5502 3.897-11.935 11.529-12.016 19.404-5.077-0.82539-10.285-2e-5 -14.858 2.3548-5.7031 2.9286-9.9995 8.0146-11.934 14.127-7.7942-5.3584-17.942-6.8207-27.279-3.0858-5.1162 2.0422-9.5398 5.5079-12.748 9.9867-6.3264-10.767-19.883-14.837-31.094-9.3363-0.24121-2.6856-0.98515-5.302-2.193-7.7131-4.537-8.932-14.622-13.571-24.356-11.204 1.1118-4.5672 0.53509-9.3823-1.6237-13.558-2.5168-5.0336-6.9809-8.4446-12.015-9.9055 3.1521-5.0632 3.4293-11.406 0.73102-16.724-1.6211-3.1328-4.174-5.6857-7.3068-7.3068 0.67136-0.69492 1.2696-1.4568 1.7855-2.2739 1.3577 1.4257 2.8844 2.6802 4.5462 3.7359 8.3621 5.3584 18.673 4.8709 26.386-0.32506 1.7959 3.7349 4.6102 6.887 8.1187 9.0922 10.313 6.5903 24.016 3.574 30.608-6.7376v-0.0824c1.1753 1.2782 2.5122 2.3976 3.9769 3.33 9.2775 5.9432 21.618 3.2129 27.523-6.0891 1.318-2.0328 2.2536-4.2893 2.7607-6.6583 7.469 4.7589 17.38 2.5808 22.165-4.8712 1.9777-3.0827 2.8375-6.7507 2.4356-10.391 10.92 2.6574 20.561-7.6212 17.211-18.349 3.0346-0.0847 5.8308-1.6651 7.4684-4.2211 1.2145-1.9026 1.678-4.1888 1.3002-6.4141 2.192 0.56831 4.5462 0.81187 6.9816 0.81187 2.4633 8e-3 4.918-0.2918 7.3068-0.89273z" stroke-width=".81187"></path></svg>
+
+        
+    </a>
+    
+    <a class="social-link " href="https://threads.net/zeedu.dev" aria-label="Lien vers les fils de discussion">
+        
+        <svg class="social-icon threads-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M331.5 235.7c2.2 .9 4.2 1.9 6.3 2.8c29.2 14.1 50.6 35.2 61.8 61.4c15.7 36.5 17.2 95.8-30.3 143.2c-36.2 36.2-80.3 52.5-142.6 53h-.3c-70.2-.5-124.1-24.1-160.4-70.2c-32.3-41-48.9-98.1-49.5-169.6V256v-.2C17 184.3 33.6 127.2 65.9 86.2C102.2 40.1 156.2 16.5 226.4 16h.3c70.3 .5 124.9 24 162.3 69.9c18.4 22.7 32 50 40.6 81.7l-40.4 10.8c-7.1-25.8-17.8-47.8-32.2-65.4c-29.2-35.8-73-54.2-130.5-54.6c-57 .5-100.1 18.8-128.2 54.4C72.1 146.1 58.5 194.3 58 256c.5 61.7 14.1 109.9 40.3 143.3c28 35.6 71.2 53.9 128.2 54.4c51.4-.4 85.4-12.6 113.7-40.9c32.3-32.2 31.7-71.8 21.4-95.9c-6.1-14.2-17.1-26-31.9-34.9c-3.7 26.9-11.8 48.3-24.7 64.8c-17.1 21.8-41.4 33.6-72.7 35.3c-23.6 1.3-46.3-4.4-63.9-16c-20.8-13.8-33-34.8-34.3-59.3c-2.5-48.3 35.7-83 95.2-86.4c21.1-1.2 40.9-.3 59.2 2.8c-2.4-14.8-7.3-26.6-14.6-35.2c-10-11.7-25.6-17.7-46.2-17.8H227c-16.6 0-39 4.6-53.3 26.3l-34.4-23.6c19.2-29.1 50.3-45.1 87.8-45.1h.8c62.6 .4 99.9 39.5 103.7 107.7l-.2 .2zm-156 68.8c1.3 25.1 28.4 36.8 54.6 35.3c25.6-1.4 54.6-11.4 59.5-73.2c-13.2-2.9-27.8-4.4-43.4-4.4c-4.8 0-9.6 .1-14.4 .4c-42.9 2.4-57.2 23.2-56.2 41.8l-.1 .1z"></path></svg>
+        
+    </a>
+    
+    <a class="social-link " href="https://instagram.com/zeedu.dev" aria-label="Lien Instagram">
+        
+        <svg class="social-icon instagram-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path></svg>
+        
+    </a>
+    
+    <a class="social-link " href="https://linkedin.com/in/eduardomzepeda" aria-label="Lien Linkedin">
+        
+        <svg class="social-icon linkedin-in-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"></path></svg>
+        
+    </a>
+    
+    <a class="social-link " href="https://zeedu.dev/" aria-label="Lien vers le site Web">
+        
+        <svg class="social-icon message-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M64 0C28.7 0 0 28.7 0 64V352c0 35.3 28.7 64 64 64h96v80c0 6.1 3.4 11.6 8.8 14.3s11.9 2.1 16.8-1.5L309.3 416H448c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H64z"></path></svg>
+        
+    </a>
+    
+</section>
+    <small><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Propulsé par
+         </font></font><a class="credits-link" rel="”nofollow”" href="https://gohugo.io/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Hugo</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        et
+         </font></font><a class="credits-link" rel="”nofollow”" href="https://github.com/EduardoZepeda/hugo-theme-latte"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Hugo Theme Latte</font></font></a>
+    </small>
+    
+    <p><small><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">© Tous droits réservés.</font></font></small></p>
+
+
+</div>
+</footer>
+
+<div id="lightbox"></div></body></html>
