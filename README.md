@@ -95,7 +95,9 @@ $ pip install -r requirements.txt
 
 ## Notebook sur Google Colab
 
-Un notebook est disponible pour l'expérimentation sur Google Colab : https://colab.research.google.com/drive/1H-TrPLF6CD7rW4cpKcENFAShlnJvbN20#scrollTo=_PRfyBYWgO6B
+/!\ Cela demandera un compte Google /!\
+
+Un notebook est disponible pour l'expérimentation sur Google Colab, derrière c'est sur drive : https://colab.research.google.com/drive/1H-TrPLF6CD7rW4cpKcENFAShlnJvbN20#scrollTo=_PRfyBYWgO6B
 
 ### Initialisation du notebook
 
