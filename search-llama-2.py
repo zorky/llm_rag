@@ -74,8 +74,6 @@ def _model_init():
                                                     ).to(_cuda_or_cpu())
 
 
-
-
 @measure_time
 def generate_response_nlp(prompt, model):
     """Génération de la réponse Llama 2"""
@@ -100,7 +98,6 @@ def search_responses(question):
     """
     Recherche des vecteurs dans ChromaDB et génération de réponse avec Llama 2
     """
-    _init_logger()
     model, collection = _init_llm()
 
     embedding_model = get_embedding_model_chroma()
@@ -113,8 +110,12 @@ def search_responses(question):
     retrieved_texts = " ".join([doc for doc in results["documents"][0]])
     prompt = f"Extraits de ChromaDb trouvés : {retrieved_texts}\n\nQuestion : {question}\nRéponse :"
 
-    return generate_response_nlp(prompt, model)
+    # return generate_response_nlp(prompt, model)
+    return prompt, model
 
 if __name__ == '__main__':
+    _init_logger()
     question = "Quels sont les points clés du document ?"
-    print(search_responses(question))
+    prompt, model = search_responses(question)
+    print(generate_response_nlp(prompt, model))
+    # print(search_responses(question))
