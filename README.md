@@ -95,10 +95,26 @@ $ pip install -r requirements.txt
 
 ## Notebook sur Google Colab
 
-- https://colab.research.google.com/drive/1H-TrPLF6CD7rW4cpKcENFAShlnJvbN20#scrollTo=_PRfyBYWgO6B
+Un notebook est disponible pour l'expérimentation sur Google Colab : https://colab.research.google.com/drive/1H-TrPLF6CD7rW4cpKcENFAShlnJvbN20#scrollTo=_PRfyBYWgO6B
 
-GPU T4 16 Go VRAM : 10/15 tokens/sec - 75 sec d'inférence
+### Initialisation du notebook
 
+1- Le token d'accès HuggingFace doit être renseignée dans le notebook, sur HF : https://huggingface.co/settings/tokens
+
+Pour retrouver la valeur de votre token initialisé avec le CLI HF : le fichier **token** dans `.cache\huggingface\token` (Windows)
+
+![token-HF-notebook.png](doc/token-HF-notebook.png)
+
+2- Mettre le fichier kb/harcelement-scolaire.pdf dans le répertoire /content/sample_data/ du notebook ou vos datasets
+
+
+![kb-pdf-notebook.png](doc/kb-pdf-notebook.png)
+
+### Performances
+
+Améliorations avec **GPU T4 16 Go VRAM** (à activer )
+
+- 10-15 tokens/sec - 75 sec d'inférence
 
 ## Etapes
 
@@ -125,7 +141,7 @@ Temps d'exécution :
 - Chroma chargement : 1,5 s
 - Recherche / inférence sur la phrase "Quels sont les points clés du document ?" sur GPU :
   - 0,50 tokens/sec
-  - 350 s (5 min 50 s) mais utilise aussi le CPU car la carte graphique est trop limitée (2 Go VRAM)
+  - 350 s (5 min 50 s)
     
 -----------------
 
@@ -181,6 +197,6 @@ Les points clés du document sont :
 
 ### Schéma des traitements
 
-![schema-scripts-llm.png](schema-scripts-llm.png)
+![schema-scripts-llm.png](doc/schema-scripts-llm.png)
 
 source : https://excalidraw.com/#json=C9Zef6EHk8ZdpQVKOZy_A,P-nk27znVP3vEhKJVEMh9Q  
