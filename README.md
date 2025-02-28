@@ -1,4 +1,4 @@
-# LLM & RAG LLAMA 2 expérimentation
+# LLM & RAG expérimentation
 
 ## Raggy Nano RAG
 
@@ -12,3 +12,6 @@ Branches :
 
 **2-** `raggy-0.2` : Indexation des embeddings des documents avec CamemBERT (pour embeddings BDD Chroma) et génération de réponse avec Llama 2 : https://github.com/zorky/llm_rag/tree/raggy-0.2
 
+**3-** `raggy-0.3` : essais avec modèles pour accélérer l'inférence en GGUF et GPTQ : non fonctionnel et aucun gain
+
+**4-** `raggy-0.4` : Indexation des embeddings des documents avec CamemBERT (pour embeddings BDD Chroma) et génération de réponse avec Mistral 7B : https://github.com/zorky/llm_rag/tree/raggy-0.4/
