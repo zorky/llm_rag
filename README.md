@@ -1,8 +1,13 @@
-# LLM & RAG LLAMA 2 expérimentation
+# LLM & RAG expérimentation
 
-## Raggy Nano RAG
+## Tentative d'accélération de l'inférence de la réponse
 
-Expérimentation de création d'un nano RAG à partir d'un PDF puis question / réponse
+Tentative d'autres méthodes pour accéler l'inférence de la réponssse : 
+
+- GGUF : modèle ultra-quantifé par llama-cpp mais empêche l'utilisation des Transformers : KO
+- GPTQ : optimisé pour le GPU : aucun gain de performance, même pire : KO
+
+Cette branche n'est pas fonctionnelle, aucun apport d'amélioration de performance.
 
 ## Prérequis
 
@@ -13,7 +18,7 @@ PyTorch est installé avec CUDA (cf. requirements.txt).
 Sous Windows, pour la prise en compte de CUDA, cela demandera peut-être d'installer le [CUDA Toolkit 12.8](https://developer.nvidia.com/cuda-downloads?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exe_local) 
 
 Vérifier que CUDA est bien pris en charge par PyTorch, après installation des packages (cf. Initialisation venv plus bas) :
-
+[README.md](README.md)
 ```bash
 $ python
 >>> import torch
@@ -109,70 +114,5 @@ $ python index-doc.py # lit et index document.pdf
 ### 2- Recherche dans la base ChromaDb sous forme de questions / réponses avec modèle de réponse Llama 2 : search-doc.py
 
 ```bash
-$ python search-llama-2.py # recherche dans la base indexée
+$ python search-response.py # recherche dans la base indexée
 ```
-
-Temps d'exécution :
-
-- initialisation modèle : 50 s
-- Chroma chargement : 1,5 s
-- Recherche sur la phrase "Quels sont les points clés du document ?": 
-  - GPU : 350 s (5 min 50 s) mais utilise aussi le CPU car la carte graphique est trop limitée (2 Go VRAM)
-    
------------------
-
-### Résultat de la question
-
-**Question :** Quels sont les points clés du document ?
-
-**Extraits de ChromaDb trouvés via les vecteurs / embeddings**
-
-```
-petites attaques. Comme une goutte d’eau qui fuit du robinet et ne
-s’arrête jamais. Séparément, ces actes ne paraissent pas graves. Mais
-répétés, ils blessent. Avec le temps, ils deviennent de plus en plus
-violents.
-
-- L’isolement : C’est à la fois une cause et une conséquence. Un/Une
-enfant peut être harcelé(e) parce qu’il/elle est différent(e) des autres
-(trop grand(e), trop bizarre, trop machin, trop truc…), mais aussi parce C’est quoi le harcèlement ?
-
-CA FAIT MAL !
-Le harcèlement à l’école, ce sont des violences répétées par un ou plusieurs
-élèves contre un/une autre camarade. Le ou les agresseurs agissent pour le
-dominer, le blesser et l’exclure. On parle de harcèlement quand on retrouve
-ces 4 éléments :
-- La violence : Ce sont parfois des actes très graves (insultes, coups,
-vols, etc.) mais aussi des gestes qui paraissent plus banals (moqueries,
-surnoms blessants, mises à l’écart…). (trop grand(e), trop bizarre, trop machin, trop truc…), mais aussi parce
-qu’il/elle est seul(e) et n’as pas d’ami(e)s qui pourraient le/la défendre.
-Harcelé(e), l’enfant risque d’être encore plus isolé(e) et fragile.
-
-Le harcèlement, c’est le refus  de la différence !
-```
-
-**Génération de la réponse par Llama 2** qui crée un résumé, qui peut être différent à chaque exécution
-
-```
-Les points clés du document sont les suivants :
-
-1. Le harcèlement est une violence répétée qui peut être causée par des raisons différentes, notamment l'isolement, la différence et la médiocrité.
-2. Le harcèlement peut prendre des formes différentes, allant des moqueries et des surnoms blessants aux actes plus graves tels que les coups et les vols.
-3. Le harcèlement peut être commis par un ou plusieurs agresseurs, et il peut avoir des conséquences graves pour la victime, notamment l'isolement et la blessure émotionnelle.
-4. Le harcèlement est un refus de la différence, et il est important de comprendre et de lutter contre cette forme de violence.
-```
-
-```
-Les points clés du document sont :
-
-1. Le harcèlement est une violence répétée, qui peut être physique ou verbale, et qui peut avoir des conséquences graves sur la santé mentale et physique des victimes.
-2. Le harcèlement peut prendre de nombreuses formes, notamment des moqueries, des insultes, des coups, des vols, etc.
-3. Le harcèlement peut être commis par un ou plusieurs agresseurs, et peut être motivé par le désir de dominer, de blesser et d'exclure les victimes.
-4. Le harcèlement peut être causé par des raisons telles que la différence de l'enfant harcelé par rapport à ses camarades, ou le fait qu'il est isolé et n'a pas d'amis qui pourraient le défendre
-```
-
-### Schéma des traitements
-
-![schema-scripts-llm.png](schema-scripts-llm.png)
-
-source : https://excalidraw.com/#json=C9Zef6EHk8ZdpQVKOZy_A,P-nk27znVP3vEhKJVEMh9Q  
