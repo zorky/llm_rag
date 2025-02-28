@@ -11,6 +11,8 @@ def get_model_name_llm():
     """ 
     Charger Llama 2 pour générer une réponse humaine en langage naturel 
     NousResearch : https://huggingface.co/NousResearch/Llama-2-7b-chat-hf
+    Config https://huggingface.co/NousResearch/Llama-2-7b-chat-hf/blob/main/config.json
+    Diff https://huggingface.co/NousResearch/Llama-2-7b-chat-hf/discussions/11/files pour quantization_config
     meta (demandera une autorisation) : https://huggingface.co/meta-llama/Llama-2-7b-chat-hf
     """
     return "NousResearch/Llama-2-7b-chat-hf"

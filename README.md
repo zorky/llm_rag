@@ -93,6 +93,13 @@ $ source env/Scripts/activate
 $ pip install -r requirements.txt
 ```
 
+## Notebook sur Google Colab
+
+- https://colab.research.google.com/drive/1H-TrPLF6CD7rW4cpKcENFAShlnJvbN20#scrollTo=_PRfyBYWgO6B
+
+GPU T4 16 Go VRAM : 10/15 tokens/sec - 75 sec d'inférence
+
+
 ## Etapes
 
 ### 1- Constitution base vectorielle avec un modèle opensource : index-doc.py
@@ -116,8 +123,9 @@ Temps d'exécution :
 
 - initialisation modèle : 50 s
 - Chroma chargement : 1,5 s
-- Recherche sur la phrase "Quels sont les points clés du document ?": 
-  - GPU : 350 s (5 min 50 s) mais utilise aussi le CPU car la carte graphique est trop limitée (2 Go VRAM)
+- Recherche / inférence sur la phrase "Quels sont les points clés du document ?" sur GPU :
+  - 0,50 tokens/sec
+  - 350 s (5 min 50 s) mais utilise aussi le CPU car la carte graphique est trop limitée (2 Go VRAM)
     
 -----------------
 

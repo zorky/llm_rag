@@ -1,6 +1,7 @@
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 import chromadb
 import torch
+import time
 
 from utils import logger
 from utils.constants import CHROMA_DB, CHROMA_COLLECTION, LOGGER
@@ -8,6 +9,7 @@ from utils.model_embeddings import get_embedding_model_chroma, get_model_name_ll
 from utils.duration_decorator import measure_time
 
 USE_GPU = True
+USE_QUANTIZATION = False
 
 has_cuda = torch.cuda.is_available()
 print(f"Support GPU : {has_cuda}")
@@ -40,21 +42,57 @@ def _init_llm():
 def _cuda_or_cpu():
     return "cuda" if has_cuda and USE_GPU else "cpu"
 
+def _getConfigQuantification():
+  quantization_config = BitsAndBytesConfig(
+    load_in_4bit=True, # quantification en 4 bits
+    bnb_4bit_quant_type='nf4',  # Utilise NormalFloat4 pour une meilleure précision
+    bnb_4bit_compute_dtype=torch.float16  # Utilise float16 pour les calculs
+  )
+  return quantization_config
+
 @measure_time
 def _model_init():
     """
     Selon CUDA avec PyTorch, initialisera avec GPU CUDA ou CPU
     """
-    return AutoModelForCausalLM.from_pretrained(get_model_name_llm(), torch_dtype=torch.float16).to(_cuda_or_cpu())
+    if USE_QUANTIZATION:
+        # https://huggingface.co/docs/transformers/main/en/main_classes/quantization#offload-between-cpu-and-gpu
+        # max_memory = {0: "10GiB", "cpu": "32GiB"}
+        _model = AutoModelForCausalLM.from_pretrained(
+            get_model_name_llm(),
+            torch_dtype=torch.bfloat16,
+            quantization_config=_getConfigQuantification(),
+            # max_memory=max_memory,
+            device_map='auto',  # répartit automatiquement entre CPU et GPU
+            # llm_int8_enable_fp32_cpu_offload=True # uniquement en 8 bits
+        )
+        _device = torch.device(_cuda_or_cpu())
+        return _model.to(_device)
+    else:
+        return AutoModelForCausalLM.from_pretrained(get_model_name_llm(),
+                                                    torch_dtype=torch.float16
+                                                    ).to(_cuda_or_cpu())
+
+
+
 
 @measure_time
 def generate_response_nlp(prompt, model):
-    """ Génération de la réponse Llama 2 """
+    """Génération de la réponse Llama 2"""
 
     tokenizer = _get_tokenizer()
     inputs = tokenizer(prompt, return_tensors="pt").to(_cuda_or_cpu())
 
+    # pour calcul de l'inférence en tokens / sec
+    start_time = time.time()
     output = model.generate(**inputs, max_new_tokens=200)
+    end_time = time.time()
+
+    generated_tokens = output.shape[1] - inputs["input_ids"].shape[1]
+    inference_time = end_time - start_time
+    tokens_per_sec = generated_tokens / inference_time if inference_time > 0 else float("inf")
+    print(f"Vitesse inférence : {tokens_per_sec:.2f} tokens/sec")
+
     return tokenizer.decode(output[0], skip_special_tokens=True)
 
 @measure_time
