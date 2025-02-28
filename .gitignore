@@ -3,6 +3,7 @@ chroma
 chroma_db
 chroma_db2
 chroma_db3
+chroma_db_mistral
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
