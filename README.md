@@ -6,6 +6,10 @@ Expérimentation d'indexation d'un document PDF dans une base Chroma, question s
 
 Le RAG Chroma utilise le modèle CamemBERT pour l'indexation et la recherche.
 
+Pour apprentissage API de la lib Chroma.
+
+Basé sur [ChatSO recherche](https://gitlab.in2p3.fr/ateliersdeladonneesgt1/chatbot-recherche/) (il faut avoir un compte ESR) 
+
 ## Prérequis
 
 ### Initialisation venv
@@ -41,7 +45,9 @@ Temps d'exécution :
 
 - Chroma chargement : 0,20 s
 - Recherche de documents sur la phrase "Quels sont les points clés du document ?" : 10 s
-    
+
+Basé sur [ChatSO recherche](https://gitlab.in2p3.fr/ateliersdeladonneesgt1/chatbot-recherche/) 
+
 -----------------
 
 ### Résultat de la question

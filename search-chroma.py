@@ -1,19 +1,13 @@
 import chromadb
+from langchain.prompts import ChatPromptTemplate
+
+from datetime import datetime
+from langchain_community.vectorstores.chroma import Chroma
 
 from utils import logger
-from utils.constants import CHROMA_DB, CHROMA_COLLECTION, LOGGER
+from utils.constants import CHROMA_DB, CHROMA_COLLECTION, PROMPT_TEMPLATE, LOGGER
 from utils.duration_decorator import measure_time
 from utils.model_embeddings import get_embeddings_model
-
-
-@measure_time
-def _chroma_load():
-    """
-    Charge les collections de vecteurs / embeddings de ChromaDB
-    """
-    chroma_client = chromadb.PersistentClient(path=CHROMA_DB)
-    collection = chroma_client.get_or_create_collection(name=CHROMA_COLLECTION)
-    return collection
 
 def _init_logger():
     logger.setup_logging()
@@ -21,23 +15,44 @@ def _init_logger():
     return log
 
 @measure_time
-def search_documents(question):
+def _chroma_embedding():
     """
-    Recherche des vecteurs dans ChromaDB afin d'obtenir les documents approchants
+    Charge le modèle de vecteurs de Chroma
     """
-    collection = _chroma_load()
     embedding_model = get_embeddings_model()
-    query_embedding = embedding_model.embed_query(question)
-    results = collection.query(
-        query_embeddings=[query_embedding],
-        n_results=3
-    )
+    chroma = Chroma(persist_directory=CHROMA_DB, embedding_function=embedding_model)
+    return chroma
 
-    retrieved_texts = " ".join([doc for doc in results["documents"][0]])
-    print(f"Extraits de ChromaDb trouvés\n")
-    print(f"Question : {question}\n\nDocuments : {retrieved_texts}\n\n")
+@measure_time
+def query_rag(question, n_results=3):
+    chroma = _chroma_embedding()
+    results = chroma.similarity_search_with_score(question, n_results)
+    # print(results)
+    if len(results) == 0:
+        print(f"Impossible de trouver des résultats correspondants.")
+        prompt = ""
+    else:
+        # sorted_result = sorted(
+        #     results,
+        #     key=lambda x: (-x[1], -datetime.fromisoformat(x[0].metadata['timestamp']).timestamp())
+        # )
+        # context_text = (
+        #     "\n\n".join([f"{doc.page_content}\n\nScore: {score}\n\nMetadata: {doc.metadata}"
+        #                  + "\n\n--------------------------------------------------------------------------------------"
+        #                  for doc, score in sorted_result])
+        # )
+        context_text = (
+            "\n\n".join([f"* Score: {score}\n\n* Metadata: {doc.metadata}\n\n* Document:\n\n{doc.page_content}\n\n"
+                         + "\n\n--------------------------------------------------------------------------------------"
+                         for doc, score in results])
+        )
+        prompt_template = ChatPromptTemplate.from_template(PROMPT_TEMPLATE)
+        prompt = prompt_template.format(context=context_text, question=question)
+
+    return prompt
 
 if __name__ == '__main__':
     _init_logger()
     question = "Quels sont les points clés du document ?"
-    print(search_documents(question))
+    response = query_rag(question)
+    print(response)
