@@ -106,7 +106,8 @@ def search_responses(question):
         query_embeddings=[query_embedding],
         n_results=3
     )
-
+    # print(f"Résultats trouvés : {results.similarity_search_with_score(question, 1)}")
+    print(f"{results}")
     retrieved_texts = " ".join([doc for doc in results["documents"][0]])
     prompt = f"Extraits de ChromaDb trouvés : {retrieved_texts}\n\nQuestion : {question}\nRéponse :"
 
