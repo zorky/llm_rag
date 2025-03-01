@@ -4,7 +4,7 @@
 
 Expérimentation d'indexation d'un document PDF dans une base Chroma, question sur cette BDD et obtention des documents issus de Chroma.
 
-Aucun modèle n'est utilisé pour l'indexation et la recherche dans Chroma, l'indexation et la recherche ne sont que textuels.
+Le RAG Chroma utilise le modèle CamemBERT pour l'indexation et la recherche.
 
 ## Prérequis
 
@@ -39,8 +39,8 @@ $ python search-chroma.py # recherche dans la base indexée
 
 Temps d'exécution :
 
-- Chroma chargement : 0,25 s
-- Recherche de documents sur la phrase "Quels sont les points clés du document ?" : 0,55 s
+- Chroma chargement : 0,20 s
+- Recherche de documents sur la phrase "Quels sont les points clés du document ?" : 10 s
     
 -----------------
 
@@ -55,14 +55,15 @@ Extraits de ChromaDb trouvés
 
 Question : Quels sont les points clés du document ?
 
-Documents : petites attaques. Comme une goutte d’eau qui fuit du robinet et ne
-s’arrête jamais. Séparément, ces actes ne paraissent pas graves. Mais
-répétés, ils blessent. Avec le temps, ils deviennent de plus en plus
-violents.
+Documents : surnoms blessants, mises à l’écart…).
 
-- L’isolement : C’est à la fois une cause et une conséquence. Un/Une
-enfant peut être harcelé(e) parce qu’il/elle est différent(e) des autres
-(trop grand(e), trop bizarre, trop machin, trop truc…), mais aussi parce C’est quoi le harcèlement ?
+- L’intention : Souvent les harceleurs disent qu’ils agissent « juste
+pour rire ». Mais derrière cette prétendue rigolade, ils ont surtout envie
+de montrer leur pouvoir ou d’exercer leur force ! Parfois ils veulent
+juste faire souffrir quelqu’un, sans aucune raison.
+
+- La répétition : Le harcèlement, c’est la répétition d’une multitude de
+petites attaques. Comme une goutte d’eau qui fuit du robinet et ne C’est quoi le harcèlement ?
 
 CA FAIT MAL !
 Le harcèlement à l’école, ce sont des violences répétées par un ou plusieurs
@@ -71,11 +72,14 @@ dominer, le blesser et l’exclure. On parle de harcèlement quand on retrouve
 ces 4 éléments :
 - La violence : Ce sont parfois des actes très graves (insultes, coups,
 vols, etc.) mais aussi des gestes qui paraissent plus banals (moqueries,
-surnoms blessants, mises à l’écart…). (trop grand(e), trop bizarre, trop machin, trop truc…), mais aussi parce
-qu’il/elle est seul(e) et n’as pas d’ami(e)s qui pourraient le/la défendre.
-Harcelé(e), l’enfant risque d’être encore plus isolé(e) et fragile.
+surnoms blessants, mises à l’écart…). petites attaques. Comme une goutte d’eau qui fuit du robinet et ne
+s’arrête jamais. Séparément, ces actes ne paraissent pas graves. Mais
+répétés, ils blessent. Avec le temps, ils deviennent de plus en plus
+violents.
 
-Le harcèlement, c’est le refus  de la différence !
+- L’isolement : C’est à la fois une cause et une conséquence. Un/Une
+enfant peut être harcelé(e) parce qu’il/elle est différent(e) des autres
+(trop grand(e), trop bizarre, trop machin, trop truc…), mais aussi parce
 
 ```
 
