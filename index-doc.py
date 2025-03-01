@@ -2,7 +2,7 @@ import chromadb
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-from utils.constants import CHROMA_DB, CHROMA_COLLECTION, LOGGER
+from utils.constants import CHROMA_DB, CHROMA_COLLECTION, CHUNK_SIZE, CHUNK_OVERLAP, LOGGER
 from utils.duration_decorator import measure_time
 from utils import logger
 
@@ -12,7 +12,7 @@ IDX_PREFIX = "doc_"
 @measure_time
 def create_db():
     """
-    Init ChromaDB et indexe le texte d'un document PDF avec embeddings (vecteurs)
+    Init ChromaDB et indexe le texte d'un document PDF sans modèle embeddings
     """
     _init_logger()
 
@@ -23,7 +23,7 @@ def create_db():
     pdf_loader = PyPDFLoader(KB_DOC)
     pages = pdf_loader.load()
 
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=CHUNK_SIZE, chunk_overlap=CHUNK_OVERLAP)
     texts = text_splitter.split_documents(pages)
 
     # Indexation des passages dans ChromaDB
