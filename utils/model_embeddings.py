@@ -3,7 +3,7 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from transformers import AutoModelForCausalLM, BitsAndBytesConfig
 
 from utils.constants import USE_GPU, USE_QUANTIZATION
-from utils.duration_decorator import measure_time
+from utils.measure_time_decorator import measure_time
 
 has_cuda = torch.cuda.is_available()
 print(f"Support GPU : {has_cuda}")

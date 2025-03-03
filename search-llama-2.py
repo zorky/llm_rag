@@ -1,28 +1,18 @@
 from transformers import AutoTokenizer
-import chromadb
 import time
 
-from utils.constants import CHROMA_DB, CHROMA_COLLECTION
 from utils.logger import init_logger
 from utils.model_embeddings import get_embedding_model_chroma, get_model_name_llm, calculate_inference_tokens_time, \
     model_inference_init, cuda_or_cpu
-from utils.duration_decorator import measure_time
-
-@measure_time
-def _chroma_load():
-    """
-    Charge les collections déjà créés de vecteurs / embeddings de ChromaDB
-    """
-    chroma_client = chromadb.PersistentClient(path=CHROMA_DB)
-    collection = chroma_client.get_or_create_collection(name=CHROMA_COLLECTION)
-    return collection
+from utils.measure_time_decorator import measure_time
+from utils.vectors_db import chroma_load
 
 @measure_time
 def generate_response_nlp(prompt):
     """Génération de la réponse Llama 2"""
-
     model = model_inference_init()
     tokenizer = AutoTokenizer.from_pretrained(get_model_name_llm())
+
     inputs = tokenizer(prompt, return_tensors="pt").to(cuda_or_cpu())
 
     # pour calcul de l'inférence en tokens / sec
@@ -37,17 +27,18 @@ def generate_response_nlp(prompt):
     return tokenizer.decode(output[0], skip_special_tokens=True)
 
 @measure_time
-def search_responses(question):
+def search_responses(question, max_results=3):
     """
-    Recherche des vecteurs dans ChromaDB et génération de réponse avec Llama 2
+    Recherche sémantique
+    des vecteurs dans ChromaDB et génération de réponse avec Llama 2
     """
-    collection = _chroma_load()
+    collection = chroma_load()
 
-    embedding_model = get_embedding_model_chroma()
-    query_embedding = embedding_model.embed_query(question)
+    embedding_model_db = get_embedding_model_chroma()
+    query_embedding = embedding_model_db.embed_query(question)
     results = collection.query(
         query_embeddings=[query_embedding],
-        n_results=3
+        n_results=max_results
     )
     print(f"{results}")
     retrieved_texts = " ".join([doc for doc in results["documents"][0]])

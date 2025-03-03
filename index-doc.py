@@ -5,7 +5,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from utils.constants import CHROMA_DB, CHROMA_COLLECTION, CHUNK_SIZE, CHUNK_OVERLAP
 from utils.logger import init_logger
 from utils.model_embeddings import get_embedding_model_chroma
-from utils.duration_decorator import measure_time
+from utils.measure_time_decorator import measure_time
 
 KB_DOC = "kb/harcelement-ecole.pdf"
 IDX_PREFIX = "doc_"
