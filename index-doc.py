@@ -19,11 +19,10 @@ def load_documents():
 
 def _get_documents_or_pages(load_all_docs) -> list[Document]:
     if load_all_docs:
-        documents = load_documents()
-    else:
-        pdf_loader = PyPDFLoader(KB_DOC_EXAMPLE)
-        documents = pdf_loader.load()
-    return documents
+        return load_documents()
+
+    pdf_loader = PyPDFLoader(KB_DOC_EXAMPLE)
+    return pdf_loader.load()
 
 @measure_time
 def create_db(load_all_docs=True or LOAD_ALL_DOCS):
