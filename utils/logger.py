@@ -2,6 +2,8 @@ import logging
 import logging.config
 import yaml
 
+from utils.constants import LOGGER
+
 def setup_logging(config_file="./utils/logging.yaml"):
     """Charge la configuration des logs depuis un fichier YAML."""
     with open(config_file, "r") as f:
@@ -10,6 +12,11 @@ def setup_logging(config_file="./utils/logging.yaml"):
 
 def get_logger(name=None):
     return logging.getLogger(name)
+
+def init_logger():
+    setup_logging()
+    log = get_logger(LOGGER)
+    return log
 
 # logger.debug("Ceci est un log de debug")
 # logger.info("Ceci est un log d'information")

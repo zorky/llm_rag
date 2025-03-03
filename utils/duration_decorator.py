@@ -8,6 +8,6 @@ def measure_time(func):
         result = func(*args, **kwargs)
         end_time = time.time()
         duration = end_time - start_time
-        print(f"Temps écoulé pour {func.__name__}: {duration:.4f} secondes")
+        print(f"\n## Temps écoulé pour {func.__name__}: {duration:.4f} secondes ##\n")
         return result
     return wrapper

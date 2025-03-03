@@ -2,10 +2,10 @@ import chromadb
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-from utils.constants import CHROMA_DB, CHROMA_COLLECTION, CHUNK_SIZE, CHUNK_OVERLAP, LOGGER
+from utils.constants import CHROMA_DB, CHROMA_COLLECTION, CHUNK_SIZE, CHUNK_OVERLAP
+from utils.logger import init_logger
 from utils.model_embeddings import get_embedding_model_chroma
 from utils.duration_decorator import measure_time
-from utils import logger
 
 KB_DOC = "kb/harcelement-ecole.pdf"
 IDX_PREFIX = "doc_"
@@ -15,8 +15,6 @@ def create_db():
     """
     Init ChromaDB et indexe le texte d'un document PDF avec embeddings (vecteurs)
     """
-    _init_logger()
-
     embedding_model = get_embedding_model_chroma()
 
     chroma_client = chromadb.PersistentClient(path=CHROMA_DB)
@@ -41,10 +39,6 @@ def create_db():
 
     print(f"Indexation terminée : {len(texts)} chunks ajoutés.")
 
-def _init_logger():
-     logger.setup_logging()
-     log = logger.get_logger(LOGGER)
-     return log
-
 if __name__ == '__main__':
+    init_logger()
     create_db()
