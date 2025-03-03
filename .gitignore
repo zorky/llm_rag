@@ -3,6 +3,7 @@ chroma
 chroma_db
 chroma_db0
 chroma_db2
+chroma*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
