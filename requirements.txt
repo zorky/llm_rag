@@ -14,3 +14,5 @@ bitsandbytes>=0.39.0
 # lecture PDF
 pypdf
 pyyaml
+# pour historique des versions paquets
+pipdeptree
