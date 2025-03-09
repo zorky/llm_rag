@@ -12,6 +12,7 @@ KB_DIR = "kb"
 KB_DOC_EXAMPLE = f"{KB_DIR}/harcelement-ecole.pdf"
 IDX_PREFIX = "doc_"
 LOAD_ALL_DOCS = True
+LIMIT_IDX = 50
 
 def load_documents():
     document_loader = PyPDFDirectoryLoader(KB_DIR)
@@ -41,7 +42,7 @@ def create_db(load_all_docs=True or LOAD_ALL_DOCS):
 
     # Indexation des passages dans ChromaDB
     for i, chunk in enumerate(texts):
-        if i < 50: # limit car sur ma station ça plante segmentation fault
+        if i < LIMIT_IDX: # limit car sur ma station ça plante segmentation fault
             embedding_vector = embedding_model.embed_query(chunk.page_content)
             print(f"{embedding_vector}")
             collection.add(
